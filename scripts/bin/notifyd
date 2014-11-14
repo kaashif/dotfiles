@@ -1,0 +1,11 @@
+#!/bin/sh
+oldnum=`dmesg | wc -l`
+while true;
+do
+	newnum=`dmesg | wc -l`
+	if [ "$oldnum" -ne "$newnum" ]; then
+		notify-send "Check dmesg!"
+	fi
+	oldnum="$newnum"
+	sleep 1
+done

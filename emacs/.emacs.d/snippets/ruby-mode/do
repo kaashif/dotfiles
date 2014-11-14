@@ -1,0 +1,6 @@
+#name : do ... end
+#group : control structure
+# --
+do |${1:vars}|
+  $0
+end

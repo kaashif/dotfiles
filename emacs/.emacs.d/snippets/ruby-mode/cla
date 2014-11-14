@@ -1,0 +1,6 @@
+#name : class << self ... end
+#group : definitions
+# --
+class ${1:self}
+  $0
+end

@@ -1,0 +1,7 @@
+# key: fun
+# name: function
+# --
+${1:private} ${2:void} ${3:name}($4)
+{
+	$0
+}

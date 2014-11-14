@@ -1,0 +1,47 @@
+set realname = "Kaashif Hymabaccus"
+set from = "kaashif@kaashif.co.uk"
+set mbox_type=Maildir
+set spoolfile = "~/mail/inbox"
+set folder = "~/mail"
+set record = +sent
+set postponed = +postponed
+set editor = 'emacsclient'
+set hostname = kaashif.co.uk
+set timeout = 300
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+set pager_index_lines = 10
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+
+folder-hook . 'set record="^"'
+folder-hook . push "<delete-pattern>~=<enter>"
+
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+
+macro index "^" "!fetchmail<enter>"
+
+color normal default default
+color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
+color hdrdefault cyan default
+color signature cyan default
+color tree brightred default
+color quoted brightgreen default
+color quoted1 brightred default
+color quoted2 brightgreen default
+color tilde cyan default
+color status default cyan
+
+set signature="~/.signature"

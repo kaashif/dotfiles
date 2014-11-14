@@ -1,0 +1,7 @@
+# key: fore
+# name: foreach
+# --
+foreach (${1:thing} in ${2:things})
+{
+	$0
+}

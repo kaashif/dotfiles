@@ -1,0 +1,7 @@
+# key: ma
+# name: ma
+# --
+public static void Main(String[] args)
+{
+	$0
+}

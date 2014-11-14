@@ -1,0 +1,6 @@
+[submodule "emacs/.emacs.d/haskell"]
+	path = emacs/.emacs.d/haskell
+	url = https://github.com/haskell/haskell-mode.git
+[submodule "emacs/.emacs.d/evil"]
+	path = emacs/.emacs.d/evil
+	url = git://gitorious.org/evil/evil.git

@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /usr/ports
+make search key="$1"

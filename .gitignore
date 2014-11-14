@@ -1,0 +1,14 @@
+*.swp
+*.swo
+*.swn
+#*#
+emacs/.emacs.d/eshell/
+emacs/.emacs.d/elpa/
+emacs/.emacs.d/auto-save-list/
+vim/.vim/bundle/
+mail/.mutt/cache/
+luakit/.config/gtk-2.0/
+mpd/.mpd/database
+mpd/.mpd/log
+mpd/.mpd/state
+mpd/.mpd/pid

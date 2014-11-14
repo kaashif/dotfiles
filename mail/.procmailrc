@@ -1,0 +1,26 @@
+PATH=/usr/bin:/usr/local/bin:/bin
+MAILDIR=$HOME/mail
+DEFAULT=$HOME/mail/inbox/
+LOGFILE=/dev/null
+SHELL=/bin/sh
+
+:0:
+* ^(From|Cc|To).*openbsd
+openbsd/
+
+:0:
+* ^(From|Cc|To).*haskell
+haskell/
+
+:0:
+* ^(From|Cc|To).*gnu
+gnu/
+
+:0:
+* ^(From|Cc|To).*eudyptula-challenge
+eudyptula/
+
+:0:
+* ^(From|To).*t61.kaashif.co.uk
+system/
+

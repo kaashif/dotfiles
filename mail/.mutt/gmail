@@ -1,0 +1,42 @@
+set imap_user = "sumduud63"
+set smtp_url = "smtp://sumduud63@smtp.gmail.com:587/"
+set from = "sumduud63@gmail.com"
+set editor = 'emacsclient'
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set imap_check_subscribed=yes
+set hostname = gmail.com
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set postponed = "+[GMail]/Drafts"
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+set pager_index_lines = 10
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+bind index "^" imap-fetch-mail
+
+color normal default default
+color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
+color hdrdefault cyan default
+color signature cyan default
+color tree brightred default
+color quoted brightgreen default
+color quoted1 brightred default
+color quoted2 brightgreen default
+color tilde cyan default
+color status default cyan

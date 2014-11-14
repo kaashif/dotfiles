@@ -1,0 +1,8 @@
+#contributor : Alejandro Espinoza Esparza <aespinoza@structum.com.mx>
+#name : class ... { ... }
+# key: class
+# --
+${1:public} class ${2:Name}
+{
+	$0
+}

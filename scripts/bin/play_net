@@ -1,0 +1,10 @@
+#!/bin/sh
+url="$1"
+downpid=
+cd $HOME
+ftp -o video $url &
+downpid=$!
+sleep 1
+mplayer video
+kill -9 $downpid
+rm video

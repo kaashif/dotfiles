@@ -1,0 +1,45 @@
+!black
+*color0:                  #1B1D1E
+*color8:                  #505354
+!red
+*color1:                  #F92672
+*color9:                  #FF5995
+!green
+*color2:                  #82B414
+*color10:                 #B6E354
+!yellow
+*color3:                  #FD971F
+*color11:                 #FEED6C
+!blue
+*color4:                  #4E82AA
+*color12:                 #0C73C2
+!magenta
+*color5:                  #8C54FE
+*color13:                 #9E6FFE
+!cyan
+*color6:                  #465457
+*color14:                 #899CA1
+!white
+*color7:                  #CCCCC6
+*color15:                 #FFFFFF
+
+URxvt.scrollBar: false
+URxvt.font: xft:Terminus:size=7
+URxvt.background: #101010
+URxvt.foreground: #FFFFFF
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: xombrero
+URxvt.urlLauncher: xombrero
+URxvt.boldFont:
+
+xterm*faceName: xft:Terminus:size=7
+xterm*background: #101010
+xterm*foreground: #FFFFFF
+
+ssh-askpass*background: #101010
+
+Xft.antialias:  1
+Xft.hinting:    1
+Xft.hintstyle:  hintfull
+Xft.lcdfilter:  lcddefault
+Xft.rgba:       rgb
