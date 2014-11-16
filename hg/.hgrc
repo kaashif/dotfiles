@@ -1,0 +1,11 @@
+[extensions]
+hgext.convert=
+hgext.bookmarks=
+hggit=
+progress=
+record=
+
+[ui]
+ssh = ssh -C
+username = Kaashif Hymabaccus <kaashif@kaashif.co.uk>
+ignore = ~/.hgignore
