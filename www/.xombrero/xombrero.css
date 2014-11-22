@@ -24,6 +24,7 @@
 @define-color ct_separator #555555;
 
 * {
+	background-color: black !important;
 	border-width: 1px;
 	padding: 0;
 	margin: 0;
@@ -39,18 +40,19 @@ GtkSpinner {
 
 .button :insensitive,
 GtkMenu :insensitive {
-	background-color: rgba(0,0,0,0); /* transparent */
+	background-color: black;
 }
 
 .entry {
 	padding: 2px;
-	color: white;
+	background-color: black;
 }
 
 #vbox > .entry,
 #statusbar * {
 	border-width: 0px;
-	color: white;
+	color: black;
+	background-color: black;
 }
 
 #statusbar > GtkEventBox {
