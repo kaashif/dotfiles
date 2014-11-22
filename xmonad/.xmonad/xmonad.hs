@@ -4,16 +4,12 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.Spacing (smartSpacing)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.MultiToggle.Instances
-import Graphics.X11.ExtraTypes.XF86
 import Data.Monoid
 import System.Exit
 import Control.Monad
-import Network.MPD (next, previous, withMPD)
-import Network.MPD.Commands.Extensions (toggle)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-myTerminal      = "urxvt"
 myFocusFollowsMouse = True
 myClickJustFocuses = False
 myBorderWidth   = 1
@@ -23,18 +19,7 @@ myNormalBorderColor  = "#FFAAAA"
 myFocusedBorderColor = "#FF0000"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm,               xK_t     ), spawn myTerminal)
-    , ((modm,               xK_d     ), spawn "dmenu_normal.sh")
-    , ((modm .|. shiftMask, xK_d     ), spawn "dmenu_playlist.sh")
-    , ((modm,               xK_c     ), spawn "xombrero")
-    , ((modm,               xK_b     ), spawn "emacsclient -c")
-    , ((0,           xF86XK_AudioPlay), void $ liftIO $ withMPD toggle)
-    , ((0,           xF86XK_AudioNext), void $ liftIO $ withMPD next)
-    , ((0,           xF86XK_AudioPrev), void $ liftIO $ withMPD previous)
-    , ((0,    xF86XK_AudioRaiseVolume), spawn "mixerctl outputs.master=+10")
-    , ((0,    xF86XK_AudioLowerVolume), spawn "mixerctl outputs.master=-10")
-    , ((0,           xF86XK_AudioMute), spawn "mixerctl outputs.master.mute=toggle")
-    , ((modm,               xK_q     ), kill)
+    [ ((modm,               xK_q     ), kill)
     , ((modm,               xK_f     ), sendMessage $ Toggle FULL)
     , ((modm,               xK_space ), sendMessage NextLayout)
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
