@@ -1,0 +1,24 @@
+super + t
+	urxvt
+
+super + c
+	xombrero
+
+super + b
+	emacsclient -c
+
+super + d
+	dmenu_normal.sh
+
+super + shift + d
+	dmenu_playlist.sh
+
+XF86Audio{Prev,Next,Play}
+	mpc -q {prev,next,toggle}
+
+XF86Audio{Raise,Lower}Volume
+	mixerctl outputs.master={+,-}10
+
+XF86AudioMute
+	mixerctl outputs.master.mute=toggle
+
