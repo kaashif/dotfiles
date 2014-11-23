@@ -1,5 +1,7 @@
 set realname = "Kaashif Hymabaccus"
 set from = "kaashif@kaashif.co.uk"
+#set smtp_url= "smtp://kaashifhymabaccus@smtp.gmail.com:587/"
+set smtp_url = "smtps://kaashif@kaashif.co.uk@smtp.zoho.com/"
 set mbox_type=Maildir
 set spoolfile = "~/mail/inbox"
 set folder = "~/mail"
@@ -34,7 +36,7 @@ bind editor <space> noop
 macro index "^" "!fetchmail<enter>"
 
 color normal default default
-color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
+color body brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
 color hdrdefault cyan default
 color signature cyan default
 color tree brightred default
