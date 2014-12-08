@@ -17,3 +17,5 @@ To remove the symlinks created by stow:
 Without stow, you must copy the files manually. Installing stow only
 takes a few seconds, it's best to do that, especially considering it
 depends on nothing but Perl, which is always already installed.
+
+Note: Most of the configs might only work as-is on OpenBSD.
