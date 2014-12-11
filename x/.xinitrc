@@ -18,4 +18,5 @@ xsetroot -solid "#101010"
 export MPD_HOST=127.0.0.1
 source ~/.zprofile
 (sxhkd &) &
+(emacs --daemon &) &
 exec ~/.cabal/bin/xmonad
