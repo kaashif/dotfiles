@@ -24,3 +24,7 @@ eudyptula/
 * ^(From|To).*t61.kaashif.co.uk
 system/
 
+:0:
+* ^(From|To).*yearbook
+yearbook/
+
