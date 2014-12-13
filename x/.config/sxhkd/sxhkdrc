@@ -2,7 +2,7 @@ super + t
 	urxvt
 
 super + c
-	xombrero
+	luakit
 
 super + b
 	emacsclient -c
