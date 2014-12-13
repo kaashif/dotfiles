@@ -8,4 +8,4 @@ ZSH_THEME_SVN_PROMPT_DIRTY=$ZSH_THEME_GIT_PROMPT_DIRTY
 ZSH_THEME_SVN_PROMPT_CLEAN=$ZSH_THEME_GIT_PROMPT_CLEAN
 
 PROMPT='%{$fg[green]%}%1~ %{$reset_color%}%{$fg[red]%}>>%{$reset_color%}%b '
-RPROMPT="$(hostname -s)"
+RPROMPT="$(hostname)"
