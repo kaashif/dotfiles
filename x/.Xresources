@@ -32,11 +32,11 @@ URxvt.url-launcher: xombrero
 URxvt.urlLauncher: xombrero
 URxvt.boldFont:
 
+ssh-askpass*background: #EEEEEE
+
 xterm*faceName: xft:Terminus:size=7
 xterm*background: #101010
 xterm*foreground: #FFFFFF
-
-ssh-askpass*background: #101010
 
 Xft.antialias:  1
 Xft.hinting:    1
