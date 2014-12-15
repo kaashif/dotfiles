@@ -1,6 +1,6 @@
 (setq package-list '(linum-relative magit evil haskell-mode auctex
-									latex-preview-pane yasnippet helm
-									geiser paredit))
+              	     latex-preview-pane yasnippet helm
+		     geiser paredit))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -31,9 +31,6 @@
 ;; Adds line numbers
 (require 'linum-relative)
 (global-linum-mode 1)
-
-;; Shell for ansi-term et al
-(setq explicit-shell-file-name "/usr/local/bin/zsh")
 
 ;; Sets lisp program names, for SLIME, run-scheme etc
 (setq inferior-lisp-program "clisp")
@@ -111,10 +108,6 @@
 (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 
 (setq haskell-process-type 'ghci)
-
-;; Only really use this for C, C#
-(require 'yasnippet)
-(yas-global-mode 1)
 
 ;; Are there even any shell snippets?
 (add-hook 'shell-mode-hook (lambda()
