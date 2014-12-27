@@ -28,3 +28,7 @@ system/
 * ^(From|To).*yearbook
 yearbook/
 
+:0:
+* ^(From|To|Subject).*server\.kaashif\.co\.uk
+server/
+
