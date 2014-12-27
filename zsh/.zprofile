@@ -8,5 +8,3 @@ export GOPATH=$HOME/.go
 export MPD_HOST=127.0.0.1
 export CVSROOT=anoncvs@ftp5.eu.openbsd.org:/cvs
 export ALTERNATE_EDITOR=""
-export SSH_ASKPASS=ssh-askpass
-
