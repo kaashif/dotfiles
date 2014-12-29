@@ -4,7 +4,7 @@
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "http://melpa.org/packages/")))
 
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/")
@@ -27,6 +27,8 @@
 ;; Vim-like scrolling
 (setq scroll-step 1
       scroll-conservatively 10000)
+
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; Adds line numbers
 (require 'linum-relative)
