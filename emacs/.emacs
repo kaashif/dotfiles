@@ -49,6 +49,9 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook #'enable-paredit-mode)
 
+;; Flymake is pretty convenient for C
+(add-hook 'c-mode-hook 'flymake-mode)
+
 ;; Disables menu bar, scroll bar, toolbar
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -111,10 +114,6 @@
 
 (setq haskell-process-type 'ghci)
 
-;; Are there even any shell snippets?
-(add-hook 'shell-mode-hook (lambda()
-            (yas-minor-mode -1)))
-
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
 
@@ -126,8 +125,8 @@
 (require 'tex)
 (require 'latex-preview-pane)
 
-;; Auto-regenerating PDF? Yes please!
-(add-hook 'latex-mode-hook 'latex-preview-pane-mode)
+;; Enable preview pane for Latex files only
+(latex-preview-pane-enable)
 
 ;; Line numbers in a terminal is just weird
 (add-hook 'eshell-mode-hook
@@ -145,6 +144,7 @@
 			  tab-width 4
 			  indent-tabs-mode t)
 
+;; For some reason, it double-pairs them without this
 (add-hook 'csharp-mode-hook
 	  #'(lambda ()
 	      (push ?{
@@ -181,26 +181,14 @@
 
 (helm-mode 1)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(blink-cursor-mode nil)
- '(haskell-process-type (quote ghci))
- '(inhibit-startup-screen t)
- '(send-mail-function (quote sendmail-send-it))
- '(tool-bar-mode nil)
- '(tooltip-mode nil))
-
 ;; Make super sure font is Terminus
 (set-frame-font "Terminus 7" nil t)
 (add-to-list 'default-frame-alist '(font . "Terminus 7"))
 
 (defun unwrap-line ()
   "Remove all newlines until we get to two consecutive ones.
-    Or until we reach the end of the buffer.
-    Great for unwrapping quotes before sending them on IRC."
+   Or until we reach the end of the buffer.
+   Great for unwrapping quotes before sending them on IRC."
   (interactive)
   (let ((start (point))
 	(end (copy-marker (or (search-forward "\n\n" nil t)
