@@ -1,6 +1,9 @@
 super + t
 	urxvt
 
+super + o
+	xset dpms force off
+
 super + c
 	luakit
 
