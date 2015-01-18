@@ -4,6 +4,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.Spacing (smartSpacing)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Hooks.EwmhDesktops
 import Data.Monoid
 import System.Exit
 import Control.Monad
@@ -67,7 +68,7 @@ myEventHook = mempty
 myLogHook = return ()
 myStartupHook = spawn "panel.sh"
 main = xmonad defaults
-defaults = defaultConfig {
+defaults = ewmh defaultConfig {
         focusFollowsMouse  = myFocusFollowsMouse,
         clickJustFocuses   = myClickJustFocuses,
         borderWidth        = myBorderWidth,
