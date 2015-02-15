@@ -1,9 +1,9 @@
 (setq user-mail-address "kaashif@kaashif.co.uk"
       user-full-name "Kaashif Hymabaccus"
       gnus-select-method '(nnmaildir "mail"
-									 (directory "~/mail")
-									 (directory-files nnheader-directory-files-safe)
-									 (get-new-mail nil))
+		 (directory "~/mail")
+		 (directory-files nnheader-directory-files-safe)
+		 (get-new-mail nil))
 	  send-mail-function 'smtpmail-send-it
       message-send-mail-function 'smtpmail-send-it
       starttls-extra-arguments nil      
@@ -27,7 +27,7 @@
 	  gnus-sum-thread-tree-single-leaf "╰► "
 	  gnus-sum-thread-tree-vertical "│"
 	  gnus-button-url 'browse-url-generic
-	  browse-url-generic-program "opera"
+	  browse-url-generic-program "luakit"
 	  browse-url-browser-function gnus-button-url
       gnus-always-read-dribble t
 	  gnus-large-newsgroup nil)
