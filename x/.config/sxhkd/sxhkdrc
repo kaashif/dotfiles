@@ -5,7 +5,7 @@ super + o
 	xset dpms force off
 
 super + c
-	luakit
+	chrome
 
 super + b
 	emacsclient -c
@@ -15,6 +15,9 @@ super + d
 
 super + shift + d
 	dmenu_playlist.sh
+
+super + shift + a
+	dmenu_add_playlist.sh
 
 XF86Audio{Prev,Next,Play}
 	mpc -q {prev,next,toggle}
