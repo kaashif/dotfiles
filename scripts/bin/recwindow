@@ -30,7 +30,7 @@ if (not $opts{r}) {
 	}
 	$pos = "-s ${w}x${h} -i :0.0+${x},${y}";
 } else {
-	$pos = "-s 1280x800 -i :0.0+0,0";
+	$pos = "-s 1680x800 -i :0.0+0,0";
 }
 print "Starting ffmpeg, press ^C to stop recording.\n";
 system("ffmpeg -y -ac 2 -f x11grab -r 30 $pos -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 output.mkv >/dev/null 2>&1");
