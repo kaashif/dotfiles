@@ -12,18 +12,18 @@ metadata_to_use      "artist,album,title,track,name,genre,date,composer,performe
 auto_update          "yes"
 
 
-#audio_output {
-#    type            "alsa"
-#    name            "MPD ALSA"
-#    mixer_type      "software"
-#    mixer_device    "default"
-#    mixer_control   "PCM"
-#}
-
 audio_output {
-    type            "ao"
-    name            "Libao Audio Device"
+    type            "alsa"
+    name            "MPD ALSA"
+    mixer_type      "software"
+    mixer_device    "default"
+    mixer_control   "PCM"
 }
+
+#audio_output {
+#    type            "ao"
+#    name            "Libao Audio Device"
+#}
 
 #audio_output {
 #     type "oss"
