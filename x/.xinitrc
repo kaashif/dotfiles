@@ -19,5 +19,4 @@ export MPD_HOST=127.0.0.1
 source ~/.zprofile
 (sxhkd &) &
 (emacs --daemon &) &
-(mpd &) &
 exec xmonad
