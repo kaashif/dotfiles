@@ -23,8 +23,8 @@ XF86Audio{Prev,Next,Play}
 	mpc -q {prev,next,toggle}
 
 XF86Audio{Raise,Lower}Volume
-	mixerctl outputs.master={+,-}10
+	amixer set Master 10%{+,-}
 
 XF86AudioMute
-	mixerctl outputs.master.mute=toggle
+	amixer set Master toggle
 
