@@ -3,7 +3,7 @@ set from = "kaashif@kaashif.co.uk"
 #set smtp_url= "smtp://kaashifhymabaccus@smtp.gmail.com:587/"
 set smtp_url = "smtps://kaashif@kaashif.co.uk@smtp.zoho.com/"
 set mbox_type=Maildir
-set spoolfile = "~/mail/inbox"
+set spoolfile = "~/mail/INBOX"
 set folder = "~/mail"
 set record = +sent
 set postponed = +postponed
@@ -27,6 +27,8 @@ hdr_order Date From To Cc
 alternative_order text/plain text/html *
 auto_view text/html
 
+mailboxes =INBOX =OpenBSD =Haskell =GNU =system
+
 folder-hook . 'set record="^"'
 folder-hook . push "<delete-pattern>~=<enter>"
 
@@ -34,7 +36,14 @@ bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop
 
-macro index "^" "!fetchmail<enter>"
+macro index "^" "!mbsync zoho<enter>"
+
+set sidebar_visible = no
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
 
 color normal default default
 color body brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
@@ -47,4 +56,5 @@ color quoted2 brightgreen default
 color tilde cyan default
 color status default cyan
 
+source ~/.mutt/crypto
 set signature="~/.signature"
