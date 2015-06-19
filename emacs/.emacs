@@ -124,7 +124,10 @@
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (setq inferior-haskell-find-project-root nil)
 
-(setq haskell-process-type 'ghci)
+(setq haskell-process-type 'cabal-repl)
+
+;; Evil in an interactive buffer ... no
+(add-hook 'haskell-interactive-mode-hook 'turn-off-evil-mode)
 
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
