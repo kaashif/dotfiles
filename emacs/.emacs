@@ -217,3 +217,28 @@
 (setq message-directory "~/.emacs.d/mail/")
 (setq gnus-directory "~/.emacs.d/news/")
 (setq nnfolder-directory "~/.emacs.d/mail/archive")
+
+(defun fence-code-block (language)
+  "Turns an indented code block into a Pandoc-style fenced one"
+  (interactive "sLanguage: ")
+  (forward-paragraph)
+  (insert "```")
+  (newline)
+  (backward-paragraph)
+  (newline)
+  (insert (concat "```" language))
+  (mark-paragraph)
+  (narrow-to-region (region-beginning) (region-end))
+  (replace-regexp "^\t" "")
+  (replace-regexp "^    " "")
+  (widen))
+
+(global-set-key (kbd "C-c c") 'fence-code-block)
+
+(defun replace-last-sexp ()
+  (interactive)
+  (let ((value (eval (preceding-sexp))))
+	(kill-sexp -1)
+	(insert (format "%S" value))))
+
+(global-set-key (kbd "C-c e") 'replace-last-sexp)
