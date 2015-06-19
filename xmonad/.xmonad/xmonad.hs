@@ -63,10 +63,10 @@ myLayout = avoidStruts $ mkToggle (single FULL) (tiled ||| Mirror tiled ||| spac
      ratio   = 91/150
      delta   = 3/100
                          
-myManageHook = manageDocks
-myEventHook = mempty
-myLogHook = return ()
-myStartupHook = spawn "panel.sh"
+myManageHook = manageDocks <+> manageHook defaultConfig
+myEventHook = ewmhDesktopsEventHook
+myLogHook = ewmhDesktopsLogHook
+myStartupHook = ewmhDesktopsStartup -- spawn "panel.sh"
 main = xmonad defaults
 defaults = ewmh defaultConfig {
         focusFollowsMouse  = myFocusFollowsMouse,
