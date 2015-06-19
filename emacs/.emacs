@@ -1,6 +1,6 @@
 (setq package-list '(linum-relative magit evil haskell-mode auctex
               	     latex-preview-pane yasnippet helm
-                     geiser paredit))
+                     geiser paredit clojure-mode slime))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -35,10 +35,14 @@
 (global-linum-mode 1)
 
 ;; Sets lisp program names, for SLIME, run-scheme etc
-(setq inferior-lisp-program "clisp")
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
 (setq scheme-program-name "racket")
 (setq geiser-active-implementations '(racket))
 (add-hook 'scheme-mode-hook 'geiser-mode)
+
+;; Built-in VC is annoying
+(setq vc-handled-backends nil)
 
 ;; For that sweet AST manipulation
 (require 'paredit)
@@ -48,6 +52,7 @@
 (add-hook 'lisp-mode-hook #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
 
 ;; Flymake is pretty convenient for C
 (add-hook 'c-mode-hook 'flymake-mode)
