@@ -1,11 +1,5 @@
 #!/usr/bin/env zsh
-export LC_CTYPE="en_GB.UTF-8"
-export LC_ALL="en_GB.UTF-8"
-export LC_MESSAGES="en_GB.UTF-8"
-export LANG="en_GB.UTF-8"
-export XDG_DESKTOP_DIR="$HOME"
-export XDG_DOWNLOAD_DIR="$HOME"
-export DISPLAY=":0"
+source ~/.zprofile
 zsh $HOME/.zshrc no
 eval $(ssh-agent)
 ssh-add
