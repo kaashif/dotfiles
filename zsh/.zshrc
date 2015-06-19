@@ -17,7 +17,7 @@ alias hr="hg record"
 alias hc="hg commit -m"
 alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
-alias irc="ssh -t server tmux attach -t IRC"
+alias irc="ssh -t elwe tmux attach -t IRC"
 
 function cd()
 {
