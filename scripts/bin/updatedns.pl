@@ -8,7 +8,8 @@ sub HELP_MESSAGE {
     print STDERR <<EOF;
 
   -h, --help        this help message
-  -v                be more verbose
+  -v, --verbose     be more verbose
+  -m, --mail        mail me the new IP
 
 Report bugs to <kaashif\@kaashif.co.uk>
 EOF
@@ -27,7 +28,7 @@ if ($opts{h}) {
 }
 my $verbose = $opts{v};
 my $update_url = "http://dynamicdns.park-your-domain.com/update?domain=kaashif.co.uk&password=b7bb0f8c0c084db59babc0e5b1dc9fdf&host=";
-my @subdomains = ("www", "@", "files", "git", "ftp");
+my @subdomains = ("gopher", "tunhost", "ip", "buildbot");
 my $has_failed = 0;
 
 foreach (@subdomains) {
