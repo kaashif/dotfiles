@@ -107,6 +107,12 @@
 ;; For blogging
 (add-to-list 'auto-mode-alist '("\\.post\\'" . markdown-mode))
 
+;; Scribble
+(add-to-list 'auto-mode-alist '("\\.scrbl\\'" . scheme-mode))
+
+;; C-x C-e in zsh
+(add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
+
 ;; Fill text only, filling code gets messy
 (set-variable 'fill-column 72)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
