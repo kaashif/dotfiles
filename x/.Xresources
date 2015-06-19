@@ -28,8 +28,8 @@ URxvt.font: xft:Terminus:size=7
 URxvt.background: #101010
 URxvt.foreground: #FFFFFF
 URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: xombrero
-URxvt.urlLauncher: xombrero
+URxvt.url-launcher: firefox
+URxvt.urlLauncher: firefox
 URxvt.boldFont:
 
 ssh-askpass*background: #EEEEEE

@@ -5,7 +5,7 @@ super + o
 	xset dpms force off
 
 super + c
-	chrome
+	firefox
 
 super + b
 	emacsclient -c
