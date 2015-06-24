@@ -12,5 +12,6 @@ xsetroot -solid "#101010"
 (sxhkd &) &
 (emacs --daemon &) &
 panel.sh
+stalonetray -i 16 &
 nmgui &
 exec xmonad
