@@ -13,8 +13,7 @@
 (package-initialize)
 
 ;; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
+(package-refresh-contents)
 
 ;; install the missing packages
 (dolist (package package-list)
