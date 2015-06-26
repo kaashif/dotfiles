@@ -1,6 +1,6 @@
 (setq package-list '(linum-relative magit evil haskell-mode auctex
               	     latex-preview-pane yasnippet helm
-                     geiser paredit clojure-mode slime))
+                     geiser paredit clojure-mode slime company))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -195,6 +195,13 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 (helm-mode 1)
+
+;; Company, for completion
+(require 'company)
+(global-company-mode)
+
+;; This is more convenient than M-x blah blah
+(define-key evil-normal-state-map (kbd ";") 'company-complete)
 
 ;; Make super sure font is Terminus
 (set-frame-font "Terminus 7" nil t)
