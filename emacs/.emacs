@@ -1,7 +1,7 @@
 (setq package-list '(linum-relative magit evil haskell-mode auctex
-              	     latex-preview-pane yasnippet helm
+                     latex-preview-pane yasnippet helm
                      geiser paredit clojure-mode slime company ghc
-					 company-ghc slime-company))
+                     company-ghc slime-company))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -159,30 +159,30 @@
 
 ;; Line numbers in a terminal is just weird
 (add-hook 'eshell-mode-hook
-	  #'(lambda () (linum-mode 0)))
+      #'(lambda () (linum-mode 0)))
 
 ;; Make sure shitty GNU style indentation is gone
 (setq c-default-style
-	  '((java-mode . "java")
-		(awk-mode . "awk")
-		(csharp-mode . "c#")
-		(other . "bsd")))
+      '((java-mode . "java")
+        (awk-mode . "awk")
+        (csharp-mode . "c#")
+        (other . "bsd")))
 
 ;; The actual default is 8 or something - crazy
 (setq-default c-basic-offset 4
-			  tab-width 4
-			  indent-tabs-mode t)
+              tab-width 4
+              indent-tabs-mode t)
 
 ;; For some reason, it double-pairs them without this
 (add-hook 'csharp-mode-hook
-	  #'(lambda ()
-	      (push ?{
-		    (getf autopair-dont-pair :code))
-	      (push ?{
-		    (getf autopair-dont-pair :string))
-	      (push ?{
-		    (getf autopair-dont-pair :comment))
-	      ))
+      #'(lambda ()
+          (push ?{
+            (getf autopair-dont-pair :code))
+          (push ?{
+            (getf autopair-dont-pair :string))
+          (push ?{
+            (getf autopair-dont-pair :comment))
+          ))
 
 (require 'helm-config)
 (require 'helm-grep)
@@ -235,9 +235,9 @@
    Great for unwrapping quotes before sending them on IRC."
   (interactive)
   (let ((start (point))
-	(end (copy-marker (or (search-forward "\n\n" nil t)
-			      (point-max))))
-	(fill-column (point-max)))
+    (end (copy-marker (or (search-forward "\n\n" nil t)
+                  (point-max))))
+    (fill-column (point-max)))
     (fill-region start end)
     (goto-char end)
     (newline)
@@ -267,8 +267,8 @@
 (defun replace-last-sexp ()
   (interactive)
   (let ((value (eval (preceding-sexp))))
-	(kill-sexp -1)
-	(insert (format "%S" value))))
+    (kill-sexp -1)
+    (insert (format "%S" value))))
 
 (defun key-binding-at-point (key)
   (mapcar (lambda (keymap) (when (keymapp keymap)
