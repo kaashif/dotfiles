@@ -1,6 +1,7 @@
 (setq package-list '(linum-relative magit evil haskell-mode auctex
               	     latex-preview-pane yasnippet helm
-                     geiser paredit clojure-mode slime company))
+                     geiser paredit clojure-mode slime company ghc
+					 company-ghc slime-company))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -40,6 +41,9 @@
 (setq geiser-active-implementations '(racket))
 (add-hook 'scheme-mode-hook 'geiser-mode)
 
+;; Make sure completion works for SLIME
+(slime-setup '(slime-company))
+
 ;; Built-in VC is annoying
 (setq vc-handled-backends nil)
 
@@ -52,6 +56,7 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook #'enable-paredit-mode)
+(add-hook 'slime-repl-mode-hook #'enable-paredit-mode)
 
 ;; Flymake is pretty convenient for C
 (add-hook 'c-mode-hook 'flymake-mode)
@@ -128,12 +133,22 @@
 ;; Evil in an interactive buffer ... no
 (add-hook 'haskell-interactive-mode-hook 'turn-off-evil-mode)
 
+;; Set up ghc-mod stuff
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(custom-set-variables '(company-ghc-show-info t))
+
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
 
 ;; For git
 (require 'magit)
 (global-set-key (kbd "C-c C-g") 'magit-status)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+;; Please don't revert changes in my buffers
+(setq magit-auto-revert-mode nil)
 
 ;; Latex stuff
 (require 'tex)
@@ -172,6 +187,10 @@
 (require 'helm-config)
 (require 'helm-grep)
 
+;; I almost never want to go through _only_ commands in my history
+(setq helm-mode-reverse-history t)
+(setq helm-move-to-line-cycle-in-source nil)
+
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
@@ -196,11 +215,15 @@
 (helm-mode 1)
 
 ;; Company, for completion
-(require 'company)
-(global-company-mode)
+;(require 'company)
+;(add-hook 'after-init-hook 'global-company-mode)
 
-;; This is more convenient than M-x blah blah
+;; This is more convenient than M-x company-complete
 (define-key evil-normal-state-map (kbd ";") 'company-complete)
+(define-key evil-insert-state-map (kbd "C-;") 'company-complete)
+
+;; More completion backends
+(add-to-list 'company-backends 'company-ghc)
 
 ;; Make super sure font is Terminus
 (set-frame-font "Terminus 7" nil t)
@@ -247,4 +270,45 @@
 	(kill-sexp -1)
 	(insert (format "%S" value))))
 
-(global-set-key (kbd "C-c e") 'replace-last-sexp)
+(defun key-binding-at-point (key)
+  (mapcar (lambda (keymap) (when (keymapp keymap)
+                             (lookup-key keymap key)))
+          (list
+           ;; More likely
+           (get-text-property (point) 'keymap)
+           (mapcar (lambda (overlay)
+                     (overlay-get overlay 'keymap))
+                   (overlays-at (point)))
+           ;; Less likely
+           (get-text-property (point) 'local-map)
+           (mapcar (lambda (overlay)
+                     (overlay-get overlay 'local-map))
+                   (overlays-at (point))))))
+
+
+(defun locate-key-binding (key)
+  "Determine in which keymap KEY is defined."
+  (interactive "kPress key: ")
+  (let ((ret
+         (list
+          (key-binding-at-point key)
+          (minor-mode-key-binding key)
+          (local-key-binding key)
+          (global-key-binding key))))
+    (when (called-interactively-p 'any)
+      (message "At Point: %s\nMinor-mode: %s\nLocal: %s\nGlobal: %s"
+               (or (nth 0 ret) "") 
+               (or (mapconcat (lambda (x) (format "%s: %s" (car x) (cdr x)))
+                              (nth 1 ret) "\n             ")
+                   "")
+               (or (nth 2 ret) "")
+               (or (nth 3 ret) "")))
+    ret))
+
+;; I never use digraphs, but I sometimes hit C-k in insert mode due to muscle memory
+(define-key evil-insert-state-map (kbd "C-k") 'nil)
+
+;; GO
+(setq gofmt-command "goimports")
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
