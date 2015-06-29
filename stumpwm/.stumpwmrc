@@ -1,0 +1,73 @@
+(in-package :stumpwm)
+
+;; Start up swank
+(require :swank)
+(swank-loader:init)
+
+;; port 4004, so I don't accidentally mess up the wm from Emacs...
+(swank:create-server :port 4004
+					 :style swank:*communication-style*
+					 :dont-close t)
+
+;; Set the contrib path
+(set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
+
+;; Bound to left win key, from xmodmap
+(set-prefix-key (kbd "F20"))
+
+(defcommand emacs () ()
+  "Runs Emacs or raises an already running Emacs"
+  (run-or-raise "emacs" '(:class "Emacs")))
+
+(define-key *root-map* (kbd "e") "emacs")
+
+(defcommand firefox () ()
+  "Runs Firefox or raises an already running Firefox"
+  (run-or-raise "firefox" '(:class "Iceweasel")))
+
+(define-key *root-map* (kbd "f") "firefox")
+
+(define-key *root-map* (kbd "t") "exec urxvt")
+
+;; Turn the modeline on
+(if (not (head-mode-line (current-head)))
+	(toggle-mode-line (current-screen) (current-head)))
+
+(setf *mode-line-pad-y* 0)
+
+;; Set up the MPD song stuff
+(load-module "mpd")
+(setf mpd:*mpd-modeline-fmt* "%S: %a - %t %e/%l")
+(mpd:mpd-connect)
+
+;; Bind audio keys (amixer module give a nice volume window)
+(load-module "amixer")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "amixer-Master-1-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "amixer-Master-1+")
+(define-key *top-map* (kbd "XF86AudioMute") "amixer-Master-toggle")
+
+;; Music!
+(define-key *top-map* (kbd "XF86AudioPrev") "mpd-prev")
+(define-key *top-map* (kbd "XF86AudioNext") "mpd-next")
+(define-key *top-map* (kbd "XF86AudioPlay") "mpd-toggle-pause")
+
+;; Browse for a playlist to play
+(defcommand mpd-clear-and-select-playlist (playlist) ((:string "Playlist: "))
+  "Clears current playlist and adds a new one"
+  (mpd:mpd-clear)
+  (mpd:mpd-format-command "load ~a" playlist)
+  (mpd:mpd-play))
+
+(define-key *root-map* (kbd "d") "mpd-clear-and-select-playlist")
+
+;; Display some useful info in the modeline
+(setf *screen-mode-line-format* (list "[%n] %W | %m | " '(:eval (current-date))))
+
+;; Update every second, obviously
+(setf *mode-line-timeout* 1)
+
+;; Focus follows mouse
+(setf *mouse-focus-policy* :sloppy)
+
+;; It looks really, really bad without this
+(setf *window-border-style* :none)
