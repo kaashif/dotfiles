@@ -30,6 +30,9 @@
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+;; No tabs, only spaces
+(setq indent-tabs-mode nil)
+
 ;; Adds line numbers
 (require 'linum-relative)
 (global-linum-mode 1)
