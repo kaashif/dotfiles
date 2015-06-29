@@ -117,6 +117,9 @@
 ;; Scribble
 (add-to-list 'auto-mode-alist '("\\.scrbl\\'" . scheme-mode))
 
+;; StumpWM RC file
+(add-to-list 'auto-mode-alist '(".stumpwmrc" . common-lisp-mode))
+
 ;; C-x C-e in zsh
 (add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
 
