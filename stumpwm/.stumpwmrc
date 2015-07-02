@@ -29,6 +29,18 @@
 
 (define-key *root-map* (kbd "t") "exec urxvt")
 
+;; IRC
+(defcommand irc () ()
+  "Runs an IRC client or raises an already running one"
+  (run-or-raise "urxvt -t 'IRC' -e 'weechat'" '(:title "WeeChat 1.2")))
+
+(define-key *root-map* (kbd "i") "irc")
+
+;; Set font and colour of modeline
+(set-font "-*-terminus-*-*-*-*-*-*-*-*-*-*-*-*")
+(setf *mode-line-background-color* "Gray10")
+(setf *mode-line-foreground-color* "Gray66")
+
 ;; Turn the modeline on
 (if (not (head-mode-line (current-head)))
 	(toggle-mode-line (current-screen) (current-head)))
@@ -59,20 +71,27 @@
 ;; Browse for a playlist to play
 (defcommand mpd-clear-and-select-playlist (playlist) ((:string "Playlist: "))
   "Clears current playlist and adds a new one"
-  (mpd:mpd-clear)
-  (mpd:mpd-format-command "load ~a" playlist)
-  (mpd:mpd-play))
+  (if (null playlist)
+	  (message "No playlist chosen")
+	  (progn (mpd:mpd-clear)
+			 (mpd:mpd-format-command "load ~a" (concatenate 'string "\"" playlist "\""))
+			 (mpd:mpd-play))))
 
 (define-key *root-map* (kbd "d") "mpd-clear-and-select-playlist")
 
-;; For CPU load
+(define-key *root-map* (kbd "q") "kill")
+
+;; For CPU load and temp - %c and %t
 (load-module "cpu")
 
 ;; Makes window (in window list) have more useful info and be more separated
 (setf *window-format* "%n%s%c")
 
+;; Battery stuff (provides %B)
+(load-module "battery-portable")
+
 ;; Display some useful info in the modeline
-(setf *screen-mode-line-format* (list "[%n] %w ^> %c %t | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
+(setf *screen-mode-line-format* (list "[%n] %w ^> %B | %c %t | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
 
 ;; Update every second, obviously
 (setf *mode-line-timeout* 1)
@@ -86,7 +105,12 @@
 ;; Make a load of workspaces
 (mapcar #'gnew (list "Terminals" "IRC" "Emacs" "Misc"))
 
-;; Set font and colour of modeline
-(set-font "-*-terminus-*-*-*-*-*-*-*-*-*-*-*-*")
-(setf *mode-line-background-color* "Gray10")
-(setf *mode-line-foreground-color* "Gray66")
+
+;; This is the split I'll want most often
+(defcommand hsplit-2-1 () ()
+  "hsplit in a 2:1 ratio"
+  (hsplit "2/3"))
+
+(define-key *root-map* (kbd "v") "hsplit-2-1")
+
+(define-key *root-map* (kbd "C-r") "remove-split")
