@@ -143,7 +143,15 @@
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(custom-set-variables '(company-ghc-show-info t))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-ghc-show-info t)
+ '(custom-safe-themes
+   (quote
+	("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))))
 
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
@@ -221,8 +229,9 @@
 (helm-mode 1)
 
 ;; Company, for completion
-;(require 'company)
-;(add-hook 'after-init-hook 'global-company-mode)
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-company-mode)
 
 ;; This is more convenient than M-x company-complete
 (define-key evil-normal-state-map (kbd ";") 'company-complete)
@@ -318,3 +327,7 @@
 (setq gofmt-command "goimports")
 (require 'go-mode)
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+;; Better mode-line
+(setq sml/no-confirm-load-theme t)
+(sml/setup)
