@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-setxkbmap gb
+setxkbmap  -variant dvorakukp gb
 xrdb -merge ~/.Xresources
 xset -b
 xset +fp /usr/local/lib/X11/fonts/terminus/
