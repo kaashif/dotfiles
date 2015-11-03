@@ -8,7 +8,7 @@
                          ("melpa" . "http://melpa.org/packages/")))
 
 ;; Load all custom things
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; Ensure packages are installed
 (package-initialize)
@@ -133,6 +133,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (setq inferior-haskell-find-project-root nil)
+
+;; Not in literate mode
+(add-hook 'literate-haskell-mode-hook 'turn-off-haskell-indent)
 
 (setq haskell-process-type 'cabal-repl)
 
@@ -322,12 +325,3 @@
 
 ;; I never use digraphs, but I sometimes hit C-k in insert mode due to muscle memory
 (define-key evil-insert-state-map (kbd "C-k") 'nil)
-
-;; GO
-(setq gofmt-command "goimports")
-(require 'go-mode)
-(add-hook 'before-save-hook 'gofmt-before-save)
-
-;; Better mode-line
-(setq sml/no-confirm-load-theme t)
-(sml/setup)
