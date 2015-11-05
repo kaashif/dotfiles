@@ -105,7 +105,6 @@
 ;; Make a load of workspaces
 (mapcar #'gnew (list "Terminals" "IRC" "Emacs" "Misc"))
 
-
 ;; This is the split I'll want most often
 (defcommand hsplit-2-1 () ()
   "hsplit in a 2:1 ratio"
@@ -114,3 +113,5 @@
 (define-key *root-map* (kbd "v") "hsplit-2-1")
 
 (define-key *root-map* (kbd "C-r") "remove-split")
+
+(run-commands "retoggle-mode-line")
