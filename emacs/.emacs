@@ -1,25 +1,61 @@
-(setq package-list '(linum-relative magit evil haskell-mode auctex
-                     latex-preview-pane yasnippet helm
-                     geiser paredit clojure-mode slime company ghc
-                     company-ghc slime-company))
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-
-;; Load all custom things
-(add-to-list 'load-path "~/.emacs.d/lisp")
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; Ensure packages are installed
 (package-initialize)
 
-;; fetch the list of packages available 
-(package-refresh-contents)
+;; Make sure use-package is installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(require 'use-package)
+
+;; Download package when use-package is used
+(setq use-package-always-ensure t)
+
+(use-package linum-relative
+  :config
+  (global-linum-mode 1))
+(use-package magit
+  :bind ("C-c C-g" . magit-status)
+  :config
+  (setq magit-last-seen-setup-instructions "1.4.0"))
+(use-package evil
+  :config
+  (evil-mode 1))
+(use-package haskell-mode)
+(use-package tex
+  :ensure auctex)
+(use-package latex-preview-pane)
+(use-package yasnippet)
+(use-package helm)
+(use-package geiser
+  :config
+  (add-hook 'scheme-mode-hook 'geiser-mode))
+(use-package paredit
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook #'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook #'enable-paredit-mode)
+  (add-hook 'slime-repl-mode-hook #'enable-paredit-mode))
+(use-package clojure-mode)
+(use-package slime-company)
+(use-package slime
+  :config
+  (slime-setup '(slime-company)))
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+(use-package ghc)
+(use-package company-ghc)
+
+;; Load all custom things
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; Save backups in a directory
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -33,33 +69,16 @@
 ;; No tabs, only spaces
 (setq indent-tabs-mode nil)
 
-;; Adds line numbers
-(require 'linum-relative)
-(global-linum-mode 1)
-
 ;; Sets lisp program names, for SLIME, run-scheme etc
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
 (setq scheme-program-name "racket")
 (setq geiser-active-implementations '(racket))
-(add-hook 'scheme-mode-hook 'geiser-mode)
 
 ;; Make sure completion works for SLIME
-(slime-setup '(slime-company))
 
 ;; Built-in VC is annoying
 (setq vc-handled-backends nil)
-
-;; For that sweet AST manipulation
-(require 'paredit)
-(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook #'enable-paredit-mode)
-(add-hook 'slime-repl-mode-hook #'enable-paredit-mode)
 
 ;; Flymake is pretty convenient for C
 (add-hook 'c-mode-hook 'flymake-mode)
@@ -76,11 +95,6 @@
 
 ;; perl-mode is actually cancer
 (defalias 'perl-mode 'cperl-mode)
-
-;; Don't just indent, complete too!
-(require 'scheme-complete)
-(eval-after-load 'scheme
-   '(define-key scheme-mode-map "\t" 'scheme-complete-or-indent))
 
 ;; I can see the rainbow
 (require 'rainbow-delimiters)
@@ -99,10 +113,6 @@
 ;; Colours!
 (require 'color-theme-molokai)
 (color-theme-molokai)
-
-;; Emacs is an operating system with a great editor
-(require 'evil)
-(evil-mode 1)
 
 ;; Markdown!
 (autoload 'markdown-mode "markdown-mode"
@@ -161,8 +171,6 @@
 
 ;; For git
 (require 'magit)
-(global-set-key (kbd "C-c C-g") 'magit-status)
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Please don't revert changes in my buffers
 (setq magit-auto-revert-mode nil)
@@ -230,11 +238,6 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 (helm-mode 1)
-
-;; Company, for completion
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(global-company-mode)
 
 ;; This is more convenient than M-x company-complete
 (define-key evil-normal-state-map (kbd ";") 'company-complete)
