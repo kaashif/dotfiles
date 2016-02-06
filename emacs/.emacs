@@ -53,6 +53,8 @@
   (add-hook 'after-init-hook 'global-company-mode))
 (use-package ghc)
 (use-package company-ghc)
+(use-package oberon
+  :mode ("\\.m\\'" . oberon-mode))
 
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
