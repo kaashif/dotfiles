@@ -16,3 +16,7 @@ export XDG_DESKTOP_DIR="$HOME"
 export XDG_DOWNLOAD_DIR="$HOME"
 export DISPLAY=":0"
 export SSH_ASKPASS="ssh-askpass"
+
+if [ -z "`pgrep X`" ]; then
+	sx
+fi
