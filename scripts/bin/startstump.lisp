@@ -1,3 +1,4 @@
 (require :stumpwm)
-(stumpwm:stumpwm)
+(in-package :stumpwm)
+(stumpwm)
 
