@@ -135,6 +135,7 @@
 ;; C-x C-e in zsh
 (add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
 
+;; after here
 ;; Fill text only, filling code gets messy
 (set-variable 'fill-column 72)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -158,21 +159,9 @@
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-ghc-show-info t)
- '(custom-safe-themes
-   (quote
-	("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))))
 
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
-
-;; For git
-(require 'magit)
 
 ;; Please don't revert changes in my buffers
 (setq magit-auto-revert-mode nil)
@@ -211,6 +200,7 @@
             (getf autopair-dont-pair :comment))
           ))
 
+
 (require 'helm-config)
 (require 'helm-grep)
 
@@ -239,7 +229,6 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-(helm-mode 1)
 
 ;; This is more convenient than M-x company-complete
 (define-key evil-normal-state-map (kbd ";") 'company-complete)
