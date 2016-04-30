@@ -116,13 +116,13 @@
 
 ;; Toggle between -variant dvorakukp gb and gb
 ;; (we start in dvorak)
-(defvar dvorak? t)
+(defvar dvorak? nil)
 
 (defcommand toggle-keyboard-layout () ()
   "toggles between dvorak and gb layouts"
   (let ((args (if dvorak?
 				  '("gb")
-				  '("-variant" "dvorakukp" "gb")))
+				  '("dvorak")))
 		(msg (if dvorak? "gb" "dvorak")))
 	(sb-ext:run-program "/usr/bin/setxkbmap" args)
 	(sb-ext:run-program "/usr/bin/xmodmap" '("/home/kaashif/.xmodmap"))
