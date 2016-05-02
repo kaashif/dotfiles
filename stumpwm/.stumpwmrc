@@ -6,8 +6,7 @@
 
 ;; port 4004, so I don't accidentally mess up the wm from Emacs...
 (swank:create-server :port 4004
-					 :style swank:*communication-style*
-					 :dont-close t)
+					 :style swank:*communication-style*)
 
 ;; Set the contrib path
 (set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
@@ -37,13 +36,14 @@
 (define-key *root-map* (kbd "i") "irc")
 
 ;; Set font and colour of modeline
-(set-font "-*-terminus-*-*-*-*-*-*-*-*-*-*-*-*")
+(set-font "-*-terminus-medium-r-normal-*-7-*-*-*-*-*-iso10646-1")
 (setf *mode-line-background-color* "Gray10")
 (setf *mode-line-foreground-color* "Gray66")
 
+
 ;; Turn the modeline on
-(if (not (head-mode-line (current-head)))
-	(toggle-mode-line (current-screen) (current-head)))
+;;(if (not (head-mode-line (current-head)))
+;;	(toggle-mode-line (current-screen) (current-head)))
 
 (defcommand retoggle-mode-line () ()
   "Toggles the modeline off and on"
@@ -58,9 +58,10 @@
 (mpd:mpd-connect)
 
 ;; Bind audio keys (amixer module give a nice volume window)
+
 (load-module "amixer")
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "amixer-Master-1-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "amixer-Master-1+")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "amixer-Master-5-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "amixer-Master-5+")
 (define-key *top-map* (kbd "XF86AudioMute") "amixer-Master-toggle")
 
 ;; Music!
@@ -79,10 +80,10 @@
 
 (define-key *root-map* (kbd "d") "mpd-clear-and-select-playlist")
 
-(define-key *root-map* (kbd "q") "kill")
+(define-key *root-map* (kbd "q") "delete")
 
 ;; For CPU load and temp - %c and %t
-(load-module "cpu")
+;;(load-module "cpu")
 
 ;; Makes window (in window list) have more useful info and be more separated
 (setf *window-format* "%n%s%c")
@@ -114,8 +115,23 @@
 
 (define-key *root-map* (kbd "C-r") "remove-split")
 
+(define-key *root-map* (kbd "S-Right") "exchange-direction right")
+(define-key *root-map* (kbd "S-Left") "exchange-direction left")
+(define-key *root-map* (kbd "S-Up") "exchange-direction up")
+(define-key *root-map* (kbd "S-Down") "exchange-direction down")
+
+;; Function to find an executable
+(defun find-exec (name)
+  (let ((paths (list #P"/usr/X11R6/bin/" #P"/usr/bin/")))
+	(loop for path in paths
+	   for exe = (merge-pathnames name path)
+	   do
+		 (if (probe-file exe)
+			 (return exe)
+			 nil))))
+
 ;; Toggle between -variant dvorakukp gb and gb
-;; (we start in dvorak)
+;; (we start in gb)
 (defvar dvorak? nil)
 
 (defcommand toggle-keyboard-layout () ()
@@ -123,12 +139,16 @@
   (let ((args (if dvorak?
 				  '("gb")
 				  '("dvorak")))
-		(msg (if dvorak? "gb" "dvorak")))
-	(sb-ext:run-program "/usr/bin/setxkbmap" args)
-	(sb-ext:run-program "/usr/bin/xmodmap" '("/home/kaashif/.xmodmap"))
+		(msg (if dvorak? "gb" "dvorak"))
+		(setxkbmap (find-exec "setxkbmap"))
+		(xmodmap (find-exec "xmodmap")))
+	(sb-ext:run-program setxkbmap args)
+	(sb-ext:run-program xmodmap '("/home/kaashif/.xmodmap"))
 	(message (concatenate 'string "Switched layout to " msg "."))
 	(setf dvorak? (not dvorak?))))
 
 (define-key *root-map* (kbd "SPC") "toggle-keyboard-layout")
 
-(run-commands "retoggle-mode-line")
+;;(run-commands "retoggle-mode-line")
+
+
