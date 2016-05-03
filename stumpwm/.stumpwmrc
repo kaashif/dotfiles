@@ -11,6 +11,9 @@
 ;; Set the contrib path
 (set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
 
+;; Suppress startup message
+(setf *startup-message* nil)
+
 ;; Bound to left win key, from xmodmap
 (set-prefix-key (kbd "F20"))
 
