@@ -66,6 +66,7 @@ sub wifi {
 	my $network = $networks[2];
 	$network =~ s/ssid//;
 	$network =~ s/\"//g;
+	$network = "Not connected";
 	return("^fg(#666666)^i($home/.xbm/wifi_01.xbm) ^fg(#999999)$network  ");
 }
 sub load {
@@ -75,7 +76,7 @@ sub load {
 	return("^fg(#666666)^i($home/.xbm/cpu.xbm) ^fg(#999999)$loads[1]  ");
 }
 sub date {
-	my $datetime = localtime->strftime("%a %d-%m-%Y %H:%M:%S");
+	my $datetime = localtime->strftime("%a %d %b %Y %H:%M:%S");
 	return("^fg(#666666)^i($home/.xbm/clock.xbm) ^fg(#999999)$datetime ");
 }
 sub volume {
@@ -86,7 +87,4 @@ sub volume {
 	return("^fg(#666666)^i($home/.xbm/spkr_01.xbm) ^fg(#999999)$vol  ");
 }
 
-while() {
-	printf("%s%s%s%s%s%s%s\n", music(), battery(), volume(), temp(), wifi(), load(), date());
-	sleep(1);
-}
+printf("%s%s%s%s%s%s\n", music(), volume(), temp(), wifi(), load(), date());
