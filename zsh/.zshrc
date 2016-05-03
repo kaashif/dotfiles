@@ -19,6 +19,10 @@ alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
 alias irc="ssh -t elwe tmux attach -t IRC"
 
+if which doas; then
+    alias sudo=doas
+fi
+
 function cd()
 {
     builtin cd $@ && ls
