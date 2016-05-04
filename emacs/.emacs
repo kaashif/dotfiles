@@ -208,8 +208,10 @@
 (setq helm-mode-reverse-history t)
 (setq helm-move-to-line-cycle-in-source nil)
 
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
+;; This causes hangs on Debian for some reason
+(unless (eq system-type 'gnu/linux)
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c")))
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
