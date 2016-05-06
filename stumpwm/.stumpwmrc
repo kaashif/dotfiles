@@ -34,12 +34,12 @@
 ;; IRC
 (defcommand irc () ()
   "Runs an IRC client or raises an already running one"
-  (run-or-raise "urxvt -t 'IRC' -e 'weechat'" '(:title "WeeChat 1.2")))
+  (run-shell-command "urxvt -e \"ssh -t aws 'tmux attach -t IRC'\""))
 
 (define-key *root-map* (kbd "i") "irc")
 
 ;; Set font and colour of modeline
-(set-font "-*-terminus-medium-r-normal-*-7-*-*-*-*-*-iso10646-1")
+;(set-font "-*-terminus-medium-r-normal-*-7-*-*-*-*-*-iso10646-1")
 (setf *mode-line-background-color* "Gray10")
 (setf *mode-line-foreground-color* "Gray66")
 
@@ -62,10 +62,10 @@
 
 ;; Bind audio keys (amixer module give a nice volume window)
 
-(load-module "amixer")
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "amixer-Master-5-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "amixer-Master-5+")
-(define-key *top-map* (kbd "XF86AudioMute") "amixer-Master-toggle")
+;(load-module "amixer")
+;(define-key *top-map* (kbd "XF86AudioLowerVolume") "amixer-Master-5-")
+;(define-key *top-map* (kbd "XF86AudioRaiseVolume") "amixer-Master-5+")
+;(define-key *top-map* (kbd "XF86AudioMute") "amixer-Master-toggle")
 
 ;; Music!
 (define-key *top-map* (kbd "XF86AudioPrev") "mpd-prev")
