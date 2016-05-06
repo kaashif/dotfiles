@@ -197,8 +197,7 @@
           (push ?{
             (getf autopair-dont-pair :string))
           (push ?{
-            (getf autopair-dont-pair :comment))
-          ))
+            (getf autopair-dont-pair :comment))))
 
 
 (require 'helm-config)
