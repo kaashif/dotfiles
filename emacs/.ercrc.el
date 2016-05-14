@@ -12,6 +12,15 @@
 							   ("unix.chat" (("kaashif1" . "megadeth"))))
 	  erc-keywords '("kaashif" "pizzaroll"))
 
-(defun erc-cmd-AYY (lmao)
-  (interactive "Payy: ")
-  (erc-send-message (format "ayy %s" lmao)))
+(defun erc-cmd-SLAP (victim)
+  "Slap someone silly with a trout."
+  (interactive)
+  (let ((channel (erc-default-target)))
+	(erc-send-action channel (format "slaps %s around a bit with a large trout"
+									 victim))))
+(defalias 'erc-cmd-TROUT 'erc-cmd-SLAP)
+
+(defun erc-cmd-COMBOSLAP (&rest victims)
+  "SLAP EVERYONE SILLY!"
+  (dolist (victim victims)
+	    (erc-cmd-SLAP victim)))
