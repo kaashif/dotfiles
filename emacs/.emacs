@@ -16,7 +16,8 @@
 
 (use-package linum-relative
   :config
-  (global-linum-mode 1))
+  (global-linum-mode 1)
+  (linum-relative-global-mode))
 (use-package magit
   :bind ("C-c C-g" . magit-status)
   :config
@@ -55,6 +56,8 @@
 (use-package company-ghc)
 (use-package oberon
   :mode ("\\.m\\'" . oberon-mode))
+(use-package scala-mode
+  :mode ("\\.scala\\'" . scala-mode))
 
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -73,7 +76,7 @@
 
 ;; Sets lisp program names, for SLIME, run-scheme etc
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "clisp")
 (setq scheme-program-name "racket")
 (setq geiser-active-implementations '(racket))
 
@@ -135,7 +138,6 @@
 ;; C-x C-e in zsh
 (add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
 
-;; after here
 ;; Fill text only, filling code gets messy
 (set-variable 'fill-column 72)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -207,10 +209,8 @@
 (setq helm-mode-reverse-history t)
 (setq helm-move-to-line-cycle-in-source nil)
 
-;; This causes hangs on Debian for some reason
-(unless (eq system-type 'gnu/linux)
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
-  (global-unset-key (kbd "C-x c")))
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
@@ -227,8 +227,8 @@
       helm-scroll-amount                    8
       helm-ff-file-name-history-use-recentf t)
 
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;(global-set-key (kbd "M-x") 'helm-M-x)
+;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 
 ;; This is more convenient than M-x company-complete
