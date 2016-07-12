@@ -1,12 +1,12 @@
+(ql:quickload :stumpwm)
 (in-package :stumpwm)
 
 ;; Start up swank
-(require :swank)
-(swank-loader:init)
+;(ql:quickload :swank)
+;(swank-loader:init)
 
 ;; port 4004, so I don't accidentally mess up the wm from Emacs...
-(swank:create-server :port 4004
-					 :style swank:*communication-style*)
+;(swank:create-server :port 4004 :style swank:*communication-style*)
 
 ;; Set the contrib path
 (set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
@@ -82,7 +82,6 @@
 			 (mpd:mpd-play))))
 
 (define-key *root-map* (kbd "d") "mpd-clear-and-select-playlist")
-
 (define-key *root-map* (kbd "q") "delete")
 
 ;; For CPU load and temp - %c and %t
@@ -137,6 +136,10 @@
 ;; (we start in gb)
 (defvar dvorak? nil)
 
+(defun run-program (progname args)
+  #+clisp (ext:run-program progname :arguments args)
+  #+sbcl (sb-ext:run-program progname args))
+
 (defcommand toggle-keyboard-layout () ()
   "toggles between dvorak and gb layouts"
   (let ((args (if dvorak?
@@ -145,13 +148,9 @@
 		(msg (if dvorak? "gb" "dvorak"))
 		(setxkbmap (find-exec "setxkbmap"))
 		(xmodmap (find-exec "xmodmap")))
-	(sb-ext:run-program setxkbmap args)
-	(sb-ext:run-program xmodmap '("/home/kaashif/.xmodmap"))
+	(run-program setxkbmap args)
+	(run-program xmodmap '("/home/kaashif/.xmodmap"))
 	(message (concatenate 'string "Switched layout to " msg "."))
 	(setf dvorak? (not dvorak?))))
 
 (define-key *root-map* (kbd "SPC") "toggle-keyboard-layout")
-
-;;(run-commands "retoggle-mode-line")
-
-
