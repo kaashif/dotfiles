@@ -1,4 +1,3 @@
-(require :stumpwm)
-(in-package :stumpwm)
-(stumpwm)
+(ql:quickload 'stumpwm)
+(stumpwm:stumpwm)
 
