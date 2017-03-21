@@ -17,6 +17,7 @@ alias hr="hg record"
 alias hc="hg commit -m"
 alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
+alias irc="ssh -t aws 'tmux attach -t IRC'"
 
 if which doas; then
     alias sudo=doas
