@@ -39,6 +39,6 @@ function em()
 
 if [[ "$1" != "no" ]]; then
 	clear
-	/usr/games/fortune -s
+	fortune -s
 	printf "\n"
 fi

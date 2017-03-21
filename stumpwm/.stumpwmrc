@@ -45,8 +45,8 @@
 
 
 ;; Turn the modeline on
-;;(if (not (head-mode-line (current-head)))
-;;	(toggle-mode-line (current-screen) (current-head)))
+(if (not (head-mode-line (current-head)))
+	(toggle-mode-line (current-screen) (current-head)))
 
 (defcommand retoggle-mode-line () ()
   "Toggles the modeline off and on"
@@ -85,7 +85,7 @@
 (define-key *root-map* (kbd "q") "delete")
 
 ;; For CPU load and temp - %c and %t
-;;(load-module "cpu")
+(load-module "cpu")
 
 ;; Makes window (in window list) have more useful info and be more separated
 (setf *window-format* "%n%s%c")
