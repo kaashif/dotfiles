@@ -39,7 +39,7 @@
 (define-key *root-map* (kbd "i") "irc")
 
 ;; Set font and colour of modeline
-;(set-font "-*-terminus-medium-r-normal-*-7-*-*-*-*-*-iso10646-1")
+(set-font "-xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso8859-1")
 (setf *mode-line-background-color* "Gray10")
 (setf *mode-line-foreground-color* "Gray66")
 
@@ -85,7 +85,7 @@
 (define-key *root-map* (kbd "q") "delete")
 
 ;; For CPU load and temp - %c and %t
-(load-module "cpu")
+;(load-module "cpu")
 
 ;; Makes window (in window list) have more useful info and be more separated
 (setf *window-format* "%n%s%c")
@@ -94,7 +94,7 @@
 (load-module "battery-portable")
 
 ;; Display some useful info in the modeline
-(setf *screen-mode-line-format* (list "[%n] %w ^> %B | %c %t | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
+(setf *screen-mode-line-format* (list "[%n] %w ^> %B | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
 
 ;; Update every second, obviously
 (setf *mode-line-timeout* 1)
@@ -107,6 +107,11 @@
 
 ;; Make a load of workspaces
 (mapcar #'gnew (list "Terminals" "IRC" "Emacs" "Misc"))
+
+;; Make some keys to move windows between workspaces easily
+;(mapcar #'(lambda (n) (define-key *top-map*
+;						(kbd (concatenate 'string (list "S-F" n)))
+;						)))
 
 ;; This is the split I'll want most often
 (defcommand hsplit-2-1 () ()
