@@ -24,7 +24,8 @@
 *color15:                 #FFFFFF
 
 URxvt.scrollBar: false
-URxvt.font: xft:Terminus:size=7
+URxvt.font: -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
+!URxvt.font: xft:terminus:size=7
 URxvt.background: #101010
 URxvt.foreground: #FFFFFF
 URxvt.perl-ext-common: default,matcher
@@ -34,9 +35,9 @@ URxvt.boldFont:
 
 ssh-askpass*background: #EEEEEE
 
-xterm*faceName: xft:Terminus:size=7
-xterm*background: #101010
-xterm*foreground: #FFFFFF
+XTerm*faceName: -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
+XTerm*background: #101010
+XTerm*foreground: #FFFFFF
 
 Xft.antialias:  1
 Xft.hinting:    1
