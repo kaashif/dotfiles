@@ -18,6 +18,7 @@ alias hc="hg commit -m"
 alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
 alias irc="ssh -t aws 'tmux attach -t IRC'"
+alias oxmail="mutt -F ~/.mutt/oxford"
 
 if which doas; then
     alias sudo=doas
@@ -40,6 +41,10 @@ function em()
 
 if [[ "$1" != "no" ]]; then
 	clear
-	fortune -s
+	if which fortune >/dev/null; then
+		fortune -s
+	else
+		/usr/games/fortune -s
+	fi
 	printf "\n"
 fi
