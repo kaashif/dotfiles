@@ -14,6 +14,12 @@
 ;; Download package when use-package is used
 (setq use-package-always-ensure t)
 
+(use-package rust-mode)
+(use-package toml-mode)
+(use-package racer
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 (use-package linum-relative
   :config
   (global-linum-mode 1)
@@ -51,7 +57,8 @@
   (slime-setup '(slime-company)))
 (use-package company
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common))
 (use-package ghc)
 (use-package company-ghc)
 (use-package oberon
@@ -61,6 +68,10 @@
 
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
+
+(setq frame-background-mode 'dark)
+(load-theme 'monokai t)
+
 
 ;; Save backups in a directory
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -108,16 +119,14 @@
 (require 'cl-lib)
 (require 'color)
 
+
+
 (cl-loop
  for index from 1 to rainbow-delimiters-max-face-count
  do
-(let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-  (cl-callf color-saturate-name (face-foreground face) 30)))
+ (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+   (cl-callf color-saturate-name (face-foreground face) 30)))
 (global-rainbow-delimiters-mode)
-
-;; Colours!
-(require 'color-theme-molokai)
-(color-theme-molokai)
 
 ;; Markdown!
 (autoload 'markdown-mode "markdown-mode"
@@ -227,8 +236,8 @@
       helm-scroll-amount                    8
       helm-ff-file-name-history-use-recentf t)
 
-;(global-set-key (kbd "M-x") 'helm-M-x)
-;(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 
 ;; This is more convenient than M-x company-complete
@@ -325,7 +334,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+	(racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
