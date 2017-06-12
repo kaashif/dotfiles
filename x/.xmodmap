@@ -1,12 +1,3 @@
 clear Mod4
-clear Left
-clear Right
-clear Up
-clear Down
 keycode 133 = F20
 keycode 115 = F20
-keycode 83 = Left
-keycode 85 = Right
-keycode 84 = Down
-keycode 80 = Up
-
