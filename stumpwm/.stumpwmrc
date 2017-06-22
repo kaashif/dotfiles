@@ -39,7 +39,7 @@
 (define-key *root-map* (kbd "i") "irc")
 
 ;; Set font and colour of modeline
-(set-font "-xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso8859-1")
+(set-font "-xos4-terminus-medium-r-normal--12-120-72-72-c-60-*-1")
 (setf *mode-line-background-color* "Gray10")
 (setf *mode-line-foreground-color* "Gray66")
 
