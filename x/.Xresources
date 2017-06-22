@@ -33,6 +33,8 @@ URxvt.url-launcher: firefox
 URxvt.urlLauncher: firefox
 URxvt.boldFont:
 
+Emacs.font: -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
+
 ssh-askpass*background: #EEEEEE
 
 XTerm*faceName: -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
