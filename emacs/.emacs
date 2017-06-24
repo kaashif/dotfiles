@@ -32,9 +32,9 @@
   :config
   (evil-mode 1))
 (use-package haskell-mode)
-(use-package tex
-  :ensure auctex)
-(use-package latex-preview-pane)
+;(use-package tex
+;  :ensure auctex)
+;(use-package latex-preview-pane)
 (use-package yasnippet)
 (use-package helm)
 (use-package geiser
@@ -179,11 +179,11 @@
 (setq magit-auto-revert-mode nil)
 
 ;; Latex stuff
-(require 'tex)
-(require 'latex-preview-pane)
+;(require 'tex)
+;(require 'latex-preview-pane)
 
 ;; Enable preview pane for Latex files only
-(latex-preview-pane-enable)
+;(latex-preview-pane-enable)
 
 ;; Line numbers in a terminal is just weird
 (add-hook 'eshell-mode-hook
