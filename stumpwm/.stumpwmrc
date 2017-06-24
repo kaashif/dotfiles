@@ -2,11 +2,11 @@
 (in-package :stumpwm)
 
 ;; Start up swank
-;(ql:quickload :swank)
-;(swank-loader:init)
+(ql:quickload :swank)
+(swank-loader:init)
 
 ;; port 4004, so I don't accidentally mess up the wm from Emacs...
-;(swank:create-server :port 4004 :style swank:*communication-style*)
+(swank:create-server :port 4004 :style swank:*communication-style*)
 
 ;; Set the contrib path
 (set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
@@ -95,6 +95,7 @@
 
 ;; Display some useful info in the modeline
 (setf *screen-mode-line-format* (list "[%n] %w ^> %B | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
+
 
 ;; Update every second, obviously
 (setf *mode-line-timeout* 1)
