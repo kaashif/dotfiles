@@ -1,4 +1,4 @@
-export PATH=$HOME/.cabal/bin:$HOME/.racket/6.1/bin:/usr/local/jdk-1.7.0/bin:$PATH:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/heroku/bin:$HOME/.local/go/bin:$HOME/.cargo/bin
+export PATH=$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.racket/6.1/bin:/usr/local/jdk-1.7.0/bin:$PATH:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/heroku/bin:$HOME/.local/go/bin:$HOME/.cargo/bin
 export EDITOR="vi"
 export GPGKEY=5AD1D8733E810B04
 export LANG=en_GB.UTF-8
