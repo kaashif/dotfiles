@@ -99,6 +99,17 @@
 ;; Flymake is pretty convenient for C
 (add-hook 'c-mode-hook 'flymake-mode)
 
+;; C style, 
+(add-hook 'c-mode-common-hook
+          '(lambda ()
+             (c-toggle-hungry-state t)
+             (c-set-style "k&r")
+             (setq c-basic-offset 4)
+             (c-tab-always-indent t)
+             (c-set-offset 'case-label '+)))
+
+
+
 ;; Disables menu bar, scroll bar, toolbar
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -148,7 +159,7 @@
 (add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
 
 ;; Fill text only, filling code gets messy
-(set-variable 'fill-column 72)
+(set-variable 'fill-column 80)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
@@ -197,8 +208,7 @@
 
 ;; The actual default is 8 or something - crazy
 (setq-default c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode t)
+              tab-width 4)
 
 ;; For some reason, it double-pairs them without this
 (add-hook 'csharp-mode-hook
@@ -329,6 +339,12 @@
 
 ;; I never use digraphs, but I sometimes hit C-k in insert mode due to muscle memory
 (define-key evil-insert-state-map (kbd "C-k") 'nil)
+
+(define-key evil-normal-state-map (kbd "<left>") 'nil)
+(define-key evil-normal-state-map (kbd "<right>") nil)
+(define-key evil-normal-state-map (kbd "<up>") nil)
+(define-key evil-normal-state-map (kbd "<down>") nil)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -337,7 +353,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-	(racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+	(gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
