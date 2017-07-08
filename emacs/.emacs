@@ -69,6 +69,7 @@
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq frame-background-mode 'dark)
 (load-theme 'monokai t)
 
@@ -258,8 +259,9 @@
 (add-to-list 'company-backends 'company-ghc)
 
 ;; Make super sure font is Terminus
-(set-frame-font "Terminus 7" nil t)
-(add-to-list 'default-frame-alist '(font . "Terminus 7"))
+(set-frame-font "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*" nil t)
+(add-to-list 'default-frame-alist '(font . "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"))
+(set-face-attribute 'default nil :font "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*")
 
 (defun unwrap-line ()
   "Remove all newlines until we get to two consecutive ones.

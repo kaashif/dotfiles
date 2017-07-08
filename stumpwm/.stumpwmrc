@@ -2,11 +2,11 @@
 (in-package :stumpwm)
 
 ;; Start up swank
-;(ql:quickload :swank)
-;(swank-loader:init)
+(ql:quickload :swank)
+(swank-loader:init)
 
 ;; port 4004, so I don't accidentally mess up the wm from Emacs...
-;(swank:create-server :port 4004 :style swank:*communication-style*)
+(swank:create-server :port 4004 :style swank:*communication-style*)
 
 ;; Set the contrib path
 (set-module-dir "/home/kaashif/src/lisp/stumpwm-contrib")
@@ -39,7 +39,7 @@
 (define-key *root-map* (kbd "i") "irc")
 
 ;; Set font and colour of modeline
-(set-font "-xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso8859-1")
+(set-font "-xos4-terminus-medium-r-normal--12-120-72-72-c-60-*-1")
 (setf *mode-line-background-color* "Gray10")
 (setf *mode-line-foreground-color* "Gray66")
 
@@ -95,6 +95,7 @@
 
 ;; Display some useful info in the modeline
 (setf *screen-mode-line-format* (list "[%n] %w ^> %B | %m | "'(:eval (run-shell-command "echo -n `date +'%A %d %B %Y %H:%M:%S'`" t))))
+
 
 ;; Update every second, obviously
 (setf *mode-line-timeout* 1)
