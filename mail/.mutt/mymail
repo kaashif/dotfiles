@@ -1,5 +1,6 @@
 set imap_user = "kaashif@kaashif.co.uk"
-set smtp_url = "smtps://kaashif@kaashif.co.uk@smtp.zoho.com:465/"
+set smtp_url = "smtp://kaashif@kaashif.co.uk@smtp.zoho.com:587/"
+set ssl_starttls = yes
 set from = "kaashif@kaashif.co.uk"
 set editor = 'emacsclient'
 set folder = "imaps://imap.zoho.com:993"
