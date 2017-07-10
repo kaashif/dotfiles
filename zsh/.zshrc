@@ -17,7 +17,7 @@ alias hr="hg record"
 alias hc="hg commit -m"
 alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
-alias irc="ssh -t aws 'tmux attach -t IRC'"
+alias irc="ssh -t earendil.kaashif.co.uk 'tmux attach -t IRC'"
 alias oxmail="mutt -F ~/.mutt/oxford"
 
 if which doas; then
