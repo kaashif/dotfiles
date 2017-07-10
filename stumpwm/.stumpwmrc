@@ -29,7 +29,7 @@
 
 (define-key *root-map* (kbd "f") "firefox")
 
-(define-key *root-map* (kbd "t") "exec urxvt")
+(define-key *root-map* (kbd "t") "exec xfce4-terminal")
 
 ;; IRC
 (defcommand irc () ()
