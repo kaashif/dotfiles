@@ -1,0 +1,11 @@
+[user]
+	email = kaashif@kaashif.co.uk
+	name = Kaashif Hymabaccus
+	signingkey = 3E810B04
+[commit]
+	gpgsign = false
+[gpg]
+	program = gpg
+[core]
+	excludesfile = /home/kaashif/.gitignore_global
+
