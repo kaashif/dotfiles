@@ -418,7 +418,7 @@ add_binds("normal", {
         function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
 
     -- History
-    key({}, "H", "Go back in the browser history `[count=1]` items.",
+    key({}, "b", "Go back in the browser history `[count=1]` items.",
         function (w, m) w:back(m.count) end),
 
     key({}, "L", "Go forward in the browser history `[count=1]` times.",
