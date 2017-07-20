@@ -17,9 +17,12 @@ export XDG_DOWNLOAD_DIR="$HOME"
 export DISPLAY=":0"
 export GPG_TTY=$(tty)
 export RUST_SRC_DIR="/home/kaashif/src/rust/src"
+export RUST_SRC_PATH="/home/kaashif/src/rust/src"
 export LC_COLLATE="en_GB.UTF-8"
 export LC_MONETARY="en_GB.UTF-8"
 export LC_NUMERIC="en_GB.UTF-8"
 export LC_TIME="en_GB.UTF-8"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
+
+export PATH="$HOME/.cargo/bin:$PATH"

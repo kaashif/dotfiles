@@ -65,6 +65,9 @@
   :mode ("\\.m\\'" . oberon-mode))
 (use-package scala-mode
   :mode ("\\.scala\\'" . scala-mode))
+(use-package flycheck
+  :config
+  (global-flycheck-mode))
 
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -92,13 +95,8 @@
 (setq scheme-program-name "racket")
 (setq geiser-active-implementations '(racket))
 
-;; Make sure completion works for SLIME
-
 ;; Built-in VC is annoying
 (setq vc-handled-backends nil)
-
-;; Flymake is pretty convenient for C
-(add-hook 'c-mode-hook 'flymake-mode)
 
 ;; C style, 
 (add-hook 'c-mode-common-hook
@@ -106,7 +104,6 @@
              (c-toggle-hungry-state t)
              (c-set-style "k&r")
              (setq c-basic-offset 4)
-             (c-tab-always-indent t)
              (c-set-offset 'case-label '+)))
 
 
@@ -131,7 +128,8 @@
 (require 'cl-lib)
 (require 'color)
 
-
+(add-hook 'rust-mode-hook #'(lambda ()
+  (setq flycheck-mode-hook #'flycheck-rust-setup)))
 
 (cl-loop
  for index from 1 to rainbow-delimiters-max-face-count
@@ -353,12 +351,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
+ '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-	(gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+	(flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(require 'org)
+(define-key global-map (kbd "C-c l") 'org-store-link)
+(define-key global-map (kbd "C-c a") 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files (list "~/src/org/todo.org"))
