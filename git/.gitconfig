@@ -8,4 +8,6 @@
 	program = gpg
 [core]
 	excludesfile = /home/kaashif/.gitignore_global
+[diff]
+	noprefix = true
 
