@@ -4,7 +4,7 @@
 static const char *fonts[] = {
 	"terminus:size=12"
 };
-static const char dmenufont[]       = "terminus:size=8";
+static const char dmenufont[]       = "terminus:size=12";
 static const char normbordercolor[] = "#404040";
 static const char normbgcolor[]     = "#202020";
 static const char normfgcolor[]     = "#c0c0c0";
