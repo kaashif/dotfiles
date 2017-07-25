@@ -8,5 +8,6 @@ xset +fp /usr/share/fonts/terminus
 xsetroot -cursor_name left_ptr
 xsetroot -solid "#101010"
 feh --bg-scale /home/kaashif/etc/stumpwm/lisp.png
+xbacklight -set 100
 dwm
 
