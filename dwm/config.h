@@ -2,7 +2,7 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"terminus:size=14"
+	"terminus:size=12"
 };
 static const char dmenufont[]       = "terminus:size=8";
 static const char normbordercolor[] = "#404040";
