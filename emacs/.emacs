@@ -257,9 +257,9 @@
 (add-to-list 'company-backends 'company-ghc)
 
 ;; Make super sure font is Terminus
-(set-frame-font "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*" nil t)
-(add-to-list 'default-frame-alist '(font . "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"))
-(set-face-attribute 'default nil :font "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*")
+(set-frame-font "-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*" nil t)
+(add-to-list 'default-frame-alist '(font . "-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*"))
+(set-face-attribute 'default nil :font "-*-terminus-*-*-*-*-14-*-*-*-*-*-*-*")
 
 (defun unwrap-line ()
   "Remove all newlines until we get to two consecutive ones.
