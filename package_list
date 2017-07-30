@@ -1,0 +1,12 @@
+coreutils-8.25p2    file, shell and text manipulation utilities
+dmenu-4.7           dynamic menu for X11
+dwm-6.1p0           dynamic window manager
+feh-2.19            lightweight image viewer
+firefox-54.0.1p0    Mozilla web browser
+git-2.13.3          GIT - Tree History Storage Tool
+keepassxc-2.2.0p0   management tool for sensitive data
+luakit-2017.07.26p0v0 fast, small, webkit based browser written in lua
+neomutt-20170714-gpgme-sasl tty-based e-mail client, Mutt with patches
+stow-2.2.2          manages software package installations with symlinks
+xfce4-terminal-0.8.6 Xfce4 vte-based terminal
+zsh-5.3.1           Z shell, Bourne shell-compatible
