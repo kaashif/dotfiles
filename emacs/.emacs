@@ -90,7 +90,7 @@
 (setq indent-tabs-mode nil)
 
 ;; Sets lisp program names, for SLIME, run-scheme etc
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;(load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "clisp")
 (setq scheme-program-name "racket")
 (setq geiser-active-implementations '(racket))
