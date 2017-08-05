@@ -9,5 +9,6 @@ xsetroot -cursor_name left_ptr
 xsetroot -solid "#101010"
 feh --bg-scale /home/kaashif/etc/stumpwm/lisp.png
 xbacklight -set 100
+(while true; do xsetroot -name "$(date +'%a %e %b %Y %H:%M:%S')"; sleep 1; done) &
 dwm
 
