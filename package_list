@@ -1,12 +1,14 @@
 coreutils-8.25p2    file, shell and text manipulation utilities
 dmenu-4.7           dynamic menu for X11
 dwm-6.1p0           dynamic window manager
-feh-2.19            lightweight image viewer
-firefox-54.0.1p0    Mozilla web browser
-git-2.13.3          GIT - Tree History Storage Tool
-keepassxc-2.2.0p0   management tool for sensitive data
-luakit-2017.07.26p0v0 fast, small, webkit based browser written in lua
+feh-2.19.2          lightweight image viewer
+firefox-55.0.1      Mozilla web browser
+git-2.14.1          GIT - Tree History Storage Tool
+gnupg-2.1.23        GNU privacy guard - a free PGP replacement
 neomutt-20170714-gpgme-sasl tty-based e-mail client, Mutt with patches
+quirks-2.353        exceptions to pkg_add rules
+racket-minimal-6.10p0 multi-paradigm programming language
 stow-2.2.2          manages software package installations with symlinks
+urtwn-firmware-1.2  firmware binary images for urtwn(4) driver
 xfce4-terminal-0.8.6 Xfce4 vte-based terminal
-zsh-5.3.1           Z shell, Bourne shell-compatible
+zsh-5.4.1           Z shell, Bourne shell-compatible
