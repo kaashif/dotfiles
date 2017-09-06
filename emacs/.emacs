@@ -20,10 +20,10 @@
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
-(use-package linum-relative
+(use-package nlinum-relative
   :config
-  (global-linum-mode 1)
-  (linum-relative-global-mode))
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+  (global-nlinum-relative-mode))
 (use-package magit
   :bind ("C-c C-g" . magit-status)
   :config
@@ -69,13 +69,14 @@
   :config
   (global-flycheck-mode))
 
+(setq flycheck-clang-include-path (list "/usr/local/include"))
+
 ;; Load all custom things
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq frame-background-mode 'dark)
 (load-theme 'monokai t)
-
 
 ;; Save backups in a directory
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -86,8 +87,6 @@
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; No tabs, only spaces
-(setq indent-tabs-mode nil)
 
 ;; Sets lisp program names, for SLIME, run-scheme etc
 ;(load (expand-file-name "~/quicklisp/slime-helper.el"))
@@ -97,16 +96,6 @@
 
 ;; Built-in VC is annoying
 (setq vc-handled-backends nil)
-
-;; C style, 
-(add-hook 'c-mode-common-hook
-          '(lambda ()
-             (c-toggle-hungry-state t)
-             (c-set-style "k&r")
-             (setq c-basic-offset 4)
-             (c-set-offset 'case-label '+)))
-
-
 
 ;; Disables menu bar, scroll bar, toolbar
 (menu-bar-mode -1)
@@ -181,6 +170,10 @@
 (autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
+;; Set right tab-width in makefile
+(add-hook 'makefile-bsdmake-mode-hook (lambda ()
+										(setq tab-width 8)))
+
 ;; Editing symlinked dotfiles gets annoying without this
 (setq vc-follow-symlinks t)
 
@@ -197,13 +190,6 @@
 ;; Line numbers in a terminal is just weird
 (add-hook 'eshell-mode-hook
       #'(lambda () (linum-mode 0)))
-
-;; Make sure shitty GNU style indentation is gone
-(setq c-default-style
-      '((java-mode . "java")
-        (awk-mode . "awk")
-        (csharp-mode . "c#")
-        (other . "bsd")))
 
 ;; The actual default is 8 or something - crazy
 (setq-default c-basic-offset 4
@@ -354,7 +340,7 @@
  '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-	(flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+	(nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -367,3 +353,9 @@
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (setq org-log-done t)
 (setq org-agenda-files (list "~/src/org/todo.org"))
+
+;; No tabs, only spaces
+(setq indent-tabs-mode nil)
+
+(add-hook 'c-mode-hook (lambda ()
+                         (setq indent-tabs-mode nil)))
