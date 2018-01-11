@@ -6,6 +6,7 @@ set editor = 'emacsclient'
 set mbox_type=Maildir
 set folder = "~/mail/"
 set spoolfile = "~/mail/inbox/"
+set followup_to=yes
 set hostname = kaashif.co.uk
 set mail_check = 120
 set timeout = 300
@@ -42,3 +43,13 @@ color tilde cyan default
 color status default cyan
 
 set signature="~/.signature"
+
+macro index <F8> \
+          "<enter-command>unset wait_key<enter><shell-escape>~/bin/mutt-notmuch --prompt search<enter><change-folder-readonly>~/.cache/mutt_results<enter>" \
+          "search mail (using notmuch)"
+    macro index <F9> \
+          "<enter-command>unset wait_key<enter><pipe-message>~/bin/mutt-notmuch thread<enter><change-folder-readonly>~/.cache/mutt_results<enter><enter-command>set wait_key<enter>" \
+          "search and reconstruct owning thread (using notmuch)"
+
+ignore *
+unignore from date subject to cc
