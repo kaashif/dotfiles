@@ -1,3 +1,0 @@
-#!/bin/sh
-video=$(xclip -selection clipboard -o | sed 's/https/http/g')
-mplayer -prefer-ipv4 $video

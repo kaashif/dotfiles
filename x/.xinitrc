@@ -7,7 +7,7 @@ xset +fp /usr/local/share/fonts/terminus
 xset +fp /usr/share/fonts/terminus
 xsetroot -cursor_name left_ptr
 xsetroot -solid "#101010"
-xbacklight -set 100
+xbacklight -set 30
 (while true; do xsetroot -name "$(date +'%a %e %b %Y %H:%M:%S')"; sleep 1; done) &
 # if we have private ssh key(s), start ssh-agent and add the key(s)
 id1=$HOME/.ssh/identity

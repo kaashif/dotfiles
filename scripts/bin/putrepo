@@ -1,2 +1,0 @@
-#!/usr/bin/env zsh
-rsync -av --delete --omit-dir-times ~/Repo/ fileserver:/home/ftp/pub/slackware/repo/

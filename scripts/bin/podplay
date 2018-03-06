@@ -1,9 +1,0 @@
-#!/bin/sh
-while read line; do
-echo $line | awk '/Podcast/ { print $4 }' | read podname
-cd ~/tmp
-ftp "$podname" &
-mplayer -prefer-ipv4 "$(echo "$podname" | grep -o '[^/]*$')"
-echo "Press any key to continue..."
-read
-done

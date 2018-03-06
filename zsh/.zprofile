@@ -24,5 +24,8 @@ export LC_NUMERIC="en_GB.UTF-8"
 export LC_TIME="en_GB.UTF-8"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
-
 export PATH="$HOME/.cargo/bin:$PATH"
+export PARALLEL_MAKE=Yes
+export MAKE_JOBS=8
+export PORTSDIR_PATH
+

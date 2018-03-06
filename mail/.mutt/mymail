@@ -5,7 +5,9 @@ set from = "kaashif@kaashif.co.uk"
 set editor = 'emacsclient'
 set mbox_type=Maildir
 set folder = "~/mail/"
+#set folder = imaps://imappro.zoho.com/
 set spoolfile = "~/mail/inbox/"
+#set spoolfile = +INBOX
 set followup_to=yes
 set hostname = kaashif.co.uk
 set mail_check = 120
@@ -30,6 +32,8 @@ bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop
 bind index "^" imap-fetch-mail
+
+set imap_check_subscribed
 
 color normal default default
 color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+

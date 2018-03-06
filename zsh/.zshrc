@@ -19,8 +19,10 @@ alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
 alias irc="ssh -t earendil.kaashif.co.uk 'tmux attach -t IRC'"
 alias oxmail="mutt -F ~/.mutt/oxford"
+alias ix="curl -F 'f:1=<-' ix.io"
+alias mutt=neomutt
 
-if which doas; then
+if which doas 2>&1 > /dev/null; then
     alias sudo=doas
 fi
 
@@ -39,12 +41,4 @@ function em()
     emacsclient $(mktemp)
 }
 
-if [[ "$1" != "no" ]]; then
-	clear
-	if which fortune >/dev/null; then
-		fortune -s
-	else
-		/usr/games/fortune -s
-	fi
-	printf "\n"
-fi
+/usr/games/fortune

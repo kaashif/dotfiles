@@ -340,7 +340,7 @@
  '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-	(nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+	(nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -369,3 +369,5 @@
 		;; This would override `fill-column' if it's an integer.
 		(emacs-lisp-docstring-fill-column t))
 	(fill-paragraph nil region)))
+
+(add-to-list 'revert-without-query ".+\.pdf")
