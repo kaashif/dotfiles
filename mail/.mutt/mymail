@@ -2,58 +2,12 @@ set imap_user = "kaashif@kaashif.co.uk"
 set smtp_url = "smtp://kaashif@kaashif.co.uk@smtp.zoho.com:587/"
 set ssl_starttls = yes
 set from = "kaashif@kaashif.co.uk"
-set editor = 'emacsclient'
 set mbox_type=Maildir
 set folder = "~/mail/"
 #set folder = imaps://imappro.zoho.com/
 set spoolfile = "~/mail/inbox/"
 #set spoolfile = +INBOX
-set followup_to=yes
 set hostname = kaashif.co.uk
-set mail_check = 120
-set timeout = 300
-set imap_keepalive = 300
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
-set certificate_file=~/.mutt/certificates
-set move = no
-set include
-set sort = 'threads'
-set sort_aux = 'reverse-last-date-received'
-set auto_tag = yes
-set pager_index_lines = 10
-ignore "Authentication-Results:"
-ignore "DomainKey-Signature:"
-ignore "DKIM-Signature:"
-hdr_order Date From To Cc
-alternative_order text/plain text/html *
-auto_view text/html
-bind editor <Tab> complete-query
-bind editor ^T complete
-bind editor <space> noop
-bind index "^" imap-fetch-mail
-
-set imap_check_subscribed
-
-color normal default default
-color body     brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
-color hdrdefault cyan default
-color signature cyan default
-color tree brightred default
-color quoted brightgreen default
-color quoted1 brightred default
-color quoted2 brightgreen default
-color tilde cyan default
-color status default cyan
-
-set signature="~/.signature"
-
-macro index <F8> \
-          "<enter-command>unset wait_key<enter><shell-escape>~/bin/mutt-notmuch --prompt search<enter><change-folder-readonly>~/.cache/mutt_results<enter>" \
-          "search mail (using notmuch)"
-    macro index <F9> \
-          "<enter-command>unset wait_key<enter><pipe-message>~/bin/mutt-notmuch thread<enter><change-folder-readonly>~/.cache/mutt_results<enter><enter-command>set wait_key<enter>" \
-          "search and reconstruct owning thread (using notmuch)"
-
-ignore *
-unignore from date subject to cc
+set header_cache=~/.mutt/cache_my/headers
+set message_cachedir=~/.mutt/cache_my/bodies
+set realname = "Kaashif Hymabaccus"

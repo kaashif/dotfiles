@@ -1,19 +1,7 @@
-set realname = "Kaashif Hymabaccus"
-set from = "kaashif@kaashif.co.uk"
-#set smtp_url= "smtp://kaashifhymabaccus@smtp.gmail.com:587/"
-set smtp_url = "smtps://kaashif@kaashif.co.uk@smtp.zoho.com/"
-set ssl_starttls=yes
-set ssl_force_tls=yes
-set mbox_type=Maildir
-set spoolfile = "~/mail/INBOX"
-set folder = "~/mail"
-set record = +sent
-set postponed = +postponed
+source ~/.mutt/mymail
+
+set followup_to=yes
 set editor = 'emacsclient'
-set hostname = kaashif.co.uk
-set timeout = 300
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
 set move = no
 set include
@@ -21,31 +9,22 @@ set sort = 'threads'
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
 set pager_index_lines = 10
-set mailcap_path = ~/.mutt/mailcap
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
 hdr_order Date From To Cc
 alternative_order text/plain text/html *
+set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
-
-mailboxes =INBOX =OpenBSD =Haskell =GNU =system
-
-folder-hook . 'set record="^"'
-folder-hook . push "<delete-pattern>~=<enter>"
-
 bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop
+bind index "^" imap-fetch-mail
 
-macro index "^" "!mbsync zoho<enter>"
-
-set sidebar_visible = no
-macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
-macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \CO sidebar-open
+set imap_check_subscribed
 
 color normal default default
 color body brightblue default (https?|ftp)://[\-\.\,/%~_:?\#a-zA-Z0-9]+
@@ -58,5 +37,12 @@ color quoted2 brightgreen default
 color tilde cyan default
 color status default cyan
 
-source ~/.mutt/crypto
 set signature="~/.signature"
+
+ignore *
+unignore from date subject to cc
+
+source ~/.mutt/crypto
+
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/mymail<enter><change-folder>!<enter>' 
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/oxmail<enter><change-folder>!<enter>' 
