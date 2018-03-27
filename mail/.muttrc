@@ -46,3 +46,5 @@ source ~/.mutt/crypto
 
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/mymail<enter><change-folder>!<enter>' 
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/oxmail<enter><change-folder>!<enter>' 
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>' 
+macro index <f5> '<sync-mailbox><enter-command>source ~/.mutt/kgmail<enter><change-folder>!<enter>' 
