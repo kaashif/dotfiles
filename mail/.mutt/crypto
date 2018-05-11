@@ -14,7 +14,7 @@ set pgp_list_secring_command="gpg2 --no-verbose --batch --with-colons --list-sec
 set pgp_sign_as=0x3E810B04
 set pgp_timeout=60
 set pgp_good_sign="^gpg: Good signature from"
-set crypt_autosign
+#set crypt_autosign
 set crypt_verify_sig=yes
-set pgp_autosign=yes
+set pgp_autosign=no
 set crypt_use_gpgme=no
