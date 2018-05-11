@@ -68,6 +68,8 @@
 (use-package flycheck
   :config
   (global-flycheck-mode))
+(use-package gap-mode
+  :mode ("\\.g\\'" . gap-mode))
 
 (setq flycheck-clang-include-path (list "/usr/local/include"))
 
@@ -340,7 +342,7 @@
  '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-	(nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+	(gap-mode nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
