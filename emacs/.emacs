@@ -112,6 +112,12 @@
 ;; perl-mode is actually cancer
 (defalias 'perl-mode 'cperl-mode)
 
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (clear-abbrev-table cperl-mode-abbrev-table)))
+
+(setq save-abbrevs 'silently)
+
 ;; I can see the rainbow
 (require 'rainbow-delimiters)
 
@@ -338,11 +344,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-	(gap-mode nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+    (gap-mode nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -373,3 +380,18 @@
 	(fill-paragraph nil region)))
 
 (add-to-list 'revert-without-query ".+\.pdf")
+
+(defun unhtml (start end)
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (replace-string "&" "&amp;")
+      (goto-char (point-min))
+      (replace-string "<" "&lt;")
+      (goto-char (point-min))
+      (replace-string ">" "&gt;")
+      )))
+
+(kill-all-abbrevs)
