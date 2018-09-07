@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"terminus:size=12"
+	"terminus:size=9"
 };
-static const char dmenufont[]       = "terminus:size=12";
+static const char dmenufont[]       = "terminus:size=9";
 static const char normbordercolor[] = "#404040";
 static const char normbgcolor[]     = "#202020";
 static const char normfgcolor[]     = "#c0c0c0";
@@ -55,8 +55,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "xfce4-terminal", NULL };
-static const char *browsercmd[]  = { "dbus-launch", "firefox", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
+static const char *browsercmd[]  = { "firefox", NULL };
 static const char *editorcmd[]  = { "emacs", NULL };
 
 static Key keys[] = {
