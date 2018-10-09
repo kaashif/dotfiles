@@ -1,11 +1,11 @@
-set imap_user = "wadh4848"
-set smtp_url = "smtp://wadh4848@smtp.ox.ac.uk:587"
+set imap_user = "wadh4848@OX.AC.UK"
+set smtp_url = "smtp://wadh4848@OX.AC.UK@outlook.office365.com:587"
 set ssl_starttls = yes
-set from = "kaashif.hymabaccus@wadh.ox.ac.uk"
-set folder = "imaps://imap.nexus.ox.ac.uk:993"
+set from = "kaashif.hymabaccus@wadham.ox.ac.uk"
+set folder = "imaps://outlook.office365.com:993"
 set spoolfile = "+INBOX"
 set imap_check_subscribed=yes
-set hostname = gmail.com
+set hostname = ox.ac.uk
 set header_cache=~/.mutt/cache_ox/headers
 set message_cachedir=~/.mutt/cache_ox/bodies
 set postponed = "+Drafts"
