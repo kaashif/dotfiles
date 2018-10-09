@@ -69,7 +69,10 @@
   :config
   (global-flycheck-mode))
 (use-package gap-mode
-  :mode ("\\.g\\'" . gap-mode))
+  :mode ("\\.g\\'" . gap-mode)
+  :config
+  (define-key gap-mode-map (kbd "M-q") #'fill-paragraph)
+  (setq gap-electric-semicolon nil))
 
 (setq flycheck-clang-include-path (list "/usr/local/include"))
 
@@ -395,3 +398,5 @@
       )))
 
 (kill-all-abbrevs)
+
+(setq show-trailing-whitespace t)
