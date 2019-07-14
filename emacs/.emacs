@@ -157,6 +157,9 @@
 ;; C-x C-e in zsh
 (add-to-list 'auto-mode-alist '("zsh.*\\'" . sh-mode))
 
+;; Sage is basically Python
+(add-to-list 'auto-mode-alist '("\\.sage\\'" . python-mode))
+
 ;; Fill text only, filling code gets messy
 (set-variable 'fill-column 80)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -326,7 +329,7 @@
           (global-key-binding key))))
     (when (called-interactively-p 'any)
       (message "At Point: %s\nMinor-mode: %s\nLocal: %s\nGlobal: %s"
-               (or (nth 0 ret) "") 
+               (or (nth 0 ret) "")
                (or (mapconcat (lambda (x) (format "%s: %s" (car x) (cdr x)))
                               (nth 1 ret) "\n             ")
                    "")
@@ -352,7 +355,7 @@
  '(magit-commit-arguments nil)
  '(package-selected-packages
    (quote
-    (gap-mode nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
+    (yaml-mode gap-mode nhexl-mode nlinum-relative flycheck xcscope gherkin-mode racer flycheck-rust toml-mode rust-mode yasnippet use-package slime-company scala-mode paredit oberon magit linum-relative latex-preview-pane helm geiser evil cython-mode company-ghc clojure-mode auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -402,3 +405,14 @@
 (setq show-trailing-whitespace t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq tex-fontify-script nil)
+
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++17")))
+(setq python-shell-interpreter "python3")
+(setq flycheck-python-pycompile-executable "python3")
+(setq mouse-yank-at-point t)
+
+(setq enable-local-variables nil
+      enable-local-eval nil)
