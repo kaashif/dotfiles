@@ -8,6 +8,7 @@
 	program = gpg
 [core]
 	excludesfile = /home/kaashif/.gitignore_global
+	autocrlf = false
 [sendemail]
 	smtpuser = kaashif@kaashif.co.uk
 	smtpserver = smtp.zoho.com
