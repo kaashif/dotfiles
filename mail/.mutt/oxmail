@@ -9,3 +9,4 @@ set hostname = ox.ac.uk
 set header_cache=~/.mutt/cache_ox/headers
 set message_cachedir=~/.mutt/cache_ox/bodies
 set postponed = "+Drafts"
+folder-hook . 'set record="^"'
