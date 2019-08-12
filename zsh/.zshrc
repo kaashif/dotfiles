@@ -17,7 +17,7 @@ alias hr="hg record"
 alias hc="hg commit -m"
 alias hp="hg push"
 alias ssh="TERM=xterm-color ssh"
-alias irc="ssh -t fingolfin.kaashif.co.uk 'tmux attach -t IRC'"
+alias irc="ssh -t kaashif.co.uk 'tmux attach -t IRC'"
 alias oxmail="mutt -F ~/.mutt/oxford"
 alias ix="curl -F 'f:1=<-' ix.io"
 alias mutt=neomutt
