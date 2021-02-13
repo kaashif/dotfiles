@@ -1,4 +1,4 @@
-export PATH=$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.racket/6.1/bin:/usr/local/jdk-1.7.0/bin:$PATH:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/heroku/bin:$HOME/.local/go/bin:$HOME/.cargo/bin
+export PATH=$HOME/.local/bin:$HOME/.cabal/bin:$HOME/.racket/6.1/bin:/usr/local/jdk-1.7.0/bin:$PATH:$HOME/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/heroku/bin:$HOME/.local/go/bin:$HOME/.cargo/bin:$HOME/.gem/ruby/2.6/bin
 export EDITOR=vi
 export GPGKEY=5AD1D8733E810B04
 export LANG=en_GB.UTF-8
@@ -26,6 +26,5 @@ export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/X11R6/lib
 export PATH="$HOME/.cargo/bin:$PATH"
 export PARALLEL_MAKE=Yes
-export MAKE_JOBS=8
+export MAKE_JOBS=12
 export PORTSDIR_PATH
-
