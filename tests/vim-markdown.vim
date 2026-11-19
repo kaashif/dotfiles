@@ -57,10 +57,38 @@ for s:lnum in range(1, 4)
   call assert_false(&l:autoindent)
 endfor
 
+let s:front_matter = ['---', 'title: A long title that should be kept on its own line', '---', '']
+let s:unchanged_blocks = [
+      \ '', 'This long Setext title should stay on a single line', '===', '',
+      \ s:fence . 'sh', '- A command inside the fence that should stay on one line', s:fence, '',
+      \ 'Name | A nice long table heading that should stay on one line', '--- | ---',
+      \ 'Tent | A long table cell should also stay on its own line', '',
+      \ '    Indented code should also stay exactly as it is.', '',
+      \ 'This long line marks a hard break and should stay on one line.  ', 'The next line.', '']
+let s:whole_file = s:front_matter
+      \ + ['Pack the tent and bring enough stakes for the entire group.', '']
+      \ + s:input
+      \ + ['  - Check that the tent poles and repair kit are packed.']
+      \ + s:unchanged_blocks
+      \ + ['Fill the water bottles and make sure we have enough for the whole trip.']
+let s:whole_file_expected = s:front_matter
+      \ + ['Pack the tent and bring enough stakes', 'for the entire group.', '']
+      \ + s:expected
+      \ + ['  - Check that the tent poles and repair', '    kit are packed.']
+      \ + s:unchanged_blocks
+      \ + ['Fill the water bottles and make sure we', 'have enough for the whole trip.']
+call s:CheckEdit(s:whole_file, 3, 'gg=G', s:whole_file_expected)
+silent undo
+call assert_equal(s:whole_file, getline(1, '$'), 'one undo reverses the whole-buffer reflow')
+call feedkeys('gg=G', 'xt')
+call feedkeys('gg=G', 'xt')
+call assert_equal(s:whole_file_expected, getline(1, '$'), 'whole-buffer reflow is idempotent')
+
 setlocal filetype=text
 call assert_equal(0, &l:textwidth)
 call assert_equal('', maparg('<CR>', 'i'))
 call assert_equal('', maparg('gqip', 'n'))
+call assert_equal('', maparg('gg=G', 'n'))
 call assert_equal('', eval(s:status_indicator))
 setlocal textwidth=72 filetype=markdown
 call assert_equal(72, &l:textwidth)

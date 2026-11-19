@@ -6,16 +6,20 @@ let b:did_markdown_list_editing = 1
 let s:list_prefix = '^\([ \t]*\)\%(\([-+*]\)\|\(\d\{1,9}\)\([.)]\)\)\([ \t]\+\)'
 let s:fence_start = '\%(\%d96\{3,}\|\~\{3,}\)'
 let s:block_start = '^\s*\%(#\{1,6}\%(\s\|$\)\|>\|[-=]\+\s*$\|\%([-*_]\s*\)\{3,}$\|' . s:fence_start . '\)'
+let s:protected_line = '^\s*\%($\|<\|\[[^]]\+\]:\)\||'
+
+function! s:NextFence(line, fence) abort
+  if empty(a:fence)
+    let text = substitute(a:line, s:list_prefix, '', '')
+    return matchstr(text, '^\s*\zs' . s:fence_start)
+  endif
+  return a:line =~# '^\s*' . escape(a:fence . a:fence[0], '~') . '*\s*$' ? '' : a:fence
+endfunction
 
 function! s:InFence(lnum) abort
   let fence = ''
-  for line in getline(1, a:lnum)
-    if empty(fence)
-      let line = substitute(line, s:list_prefix, '', '')
-      let fence = matchstr(line, '^\s*\zs' . s:fence_start)
-    elseif line =~# '^\s*' . escape(fence . fence[0], '~') . '*\s*$'
-      let fence = ''
-    endif
+  for text in getline(1, a:lnum)
+    let fence = s:NextFence(text, fence)
   endfor
   return !empty(fence)
 endfunction
@@ -64,39 +68,115 @@ function! s:ListEnter() abort
   return "\<CR>"
 endfunction
 
-function! s:ReflowParagraph() abort
-  let item = s:ListItem(line('.'))
-  if empty(item)
-    normal! gqip
-    return
-  endif
-
-  let first = item[0]
-  let width = item[1]
-  let last = line('.')
+function! s:ParagraphEnd(start, code_indent, stop_pattern) abort
+  let last = a:start
   while last < line('$')
     let next = getline(last + 1)
-    if next =~# '^\s*$' || next =~# s:list_prefix || next =~# s:block_start
-          \ || indent(last + 1) >= width + 4
+    if next =~# a:stop_pattern || next =~# s:list_prefix || next =~# s:block_start
+          \ || indent(last + 1) >= a:code_indent
       break
     endif
     let last += 1
   endwhile
-  " Markdown allows continuation text without the list item's indentation.
-  let continuation = getline(first + 1, last)
-  let aligned = map(copy(continuation), {_, text -> repeat(' ', width) . substitute(text, '^\s*', '', '')})
-  if continuation !=# aligned
-    call setline(first + 1, aligned)
-    undojoin
+  return last
+endfunction
+
+function! s:ReflowRange(first, last, list_width) abort
+  if a:list_width > 0
+    " Markdown allows continuation text without the list item's indentation.
+    let continuation = getline(a:first + 1, a:last)
+    let prefix = repeat(' ', a:list_width)
+    let aligned = map(copy(continuation), {_, text -> prefix . substitute(text, '^\s*', '', '')})
+    if continuation !=# aligned
+      call setline(a:first + 1, aligned)
+      undojoin
+    endif
   endif
 
   " Keep the hanging indent even when a single word exceeds textwidth.
   let autoindent = &l:autoindent
   setlocal autoindent
   try
-    execute first . 'normal! V' . (last > first ? (last - first) . 'j' : '') . 'gq'
+    execute 'keepjumps ' . a:first . 'normal! V' . (a:last > a:first ? (a:last - a:first) . 'j' : '') . 'gq'
   finally
     let &l:autoindent = autoindent
+  endtry
+endfunction
+
+function! s:ReflowParagraph() abort
+  let item = s:ListItem(line('.'))
+  if empty(item)
+    normal! gqip
+    return
+  endif
+  let first = item[0]
+  let width = item[1]
+  call s:ReflowRange(first, s:ParagraphEnd(line('.'), width + 4, '^\s*$'), width)
+endfunction
+
+function! s:ParagraphRanges() abort
+  let ranges = []
+  let fence = ''
+  let list_widths = []
+  let lnum = 1
+  if getline(1) =~# '^\%(---\|+++\)\s*$'
+    let closing = match(getline(2, '$'), '^' . trim(getline(1)) . '\s*$')
+    if closing >= 0
+      let lnum = closing + 3
+    endif
+  endif
+
+  while lnum <= line('$')
+    let text = getline(lnum)
+    let in_fence = !empty(fence)
+    let fence = s:NextFence(text, fence)
+    if in_fence || !empty(fence) || text =~# s:protected_line || text =~# s:block_start
+      let lnum += 1
+      continue
+    endif
+
+    let indent = indent(lnum)
+    while !empty(list_widths) && indent < list_widths[-1]
+      call remove(list_widths, -1)
+    endwhile
+    let base = empty(list_widths) ? 0 : list_widths[-1]
+    if indent >= base + 4
+      let lnum += 1
+      continue
+    endif
+
+    let marker = matchstr(text, s:list_prefix)
+    let width = strdisplaywidth(marker)
+    if width > 0
+      call add(list_widths, width)
+    endif
+    let last = s:ParagraphEnd(lnum, (width > 0 ? width : base) + 4, s:protected_line)
+    let setext_heading = width == 0 && getline(last + 1) =~# '^\s*\%(-\+\|=\+\)\s*$'
+    let hard_break = match(getline(lnum, last), '\%(  \+\|\\\)$') >= 0
+    if !setext_heading && !hard_break
+      call add(ranges, [lnum, last, width])
+    endif
+    let lnum = last + 1
+  endwhile
+  return ranges
+endfunction
+
+function! s:ReflowBuffer() abort
+  let view = winsaveview()
+  let foldenable = &l:foldenable
+  let initial_tick = b:changedtick
+  setlocal nofoldenable
+  try
+    " Work upward so changes do not shift the remaining ranges.
+    for [first, last, width] in reverse(s:ParagraphRanges())
+      if b:changedtick != initial_tick
+        undojoin
+      endif
+      call s:ReflowRange(first, last, width)
+    endfor
+  finally
+    let &l:foldenable = foldenable
+    call winrestview(view)
   endtry
 endfunction
 
@@ -109,6 +189,8 @@ setlocal autoindent formatoptions+=tn formatoptions-=l
 
 inoremap <buffer> <CR> <Cmd>call feedkeys(<SID>ListEnter(), 'in')<CR>
 nnoremap <buffer><silent> gqip <Cmd>call <SID>ReflowParagraph()<CR>
+nnoremap <buffer><silent> gg=G <Cmd>call <SID>ReflowBuffer()<CR>
 
 let b:undo_ftplugin .= '|setlocal autoindent< textwidth<|silent! iunmap <buffer> <CR>'
-      \ . '|silent! nunmap <buffer> gqip|unlet! b:did_markdown_list_editing'
+      \ . '|silent! nunmap <buffer> gqip|silent! nunmap <buffer> gg=G'
+      \ . '|unlet! b:did_markdown_list_editing'
