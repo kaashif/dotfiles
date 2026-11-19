@@ -25,9 +25,10 @@ Vim
 
 Install with `stow vim`. The vimrc enables syntax highlighting and shows
 `[Markdown lists]` in the statusline when the Markdown list plugin is loaded.
-In a list item, Enter indents a continuation line. Enter again on that empty
-line starts the next item. In Normal mode, `gqip` reflows the current item
-using Vim's `textwidth` setting.
+Markdown text wraps as you type at Vim's `textwidth` setting, which defaults
+to 80 columns in Markdown. In a list item, Enter indents a continuation line.
+Enter again on that empty line starts the next item. In Normal mode, `gqip`
+reflows the current item using the same width.
 
 Run the Vim tests from the repository root.
 

@@ -102,8 +102,13 @@ endfunction
 
 " Extend Vim's Markdown list formatting to ordered markers ending in ')'.
 let &l:formatlistpat = '^\s*\d\{1,9})[ \t]\+\|' . &l:formatlistpat
+if &l:textwidth == 0
+  setlocal textwidth=80
+endif
+setlocal autoindent formatoptions+=tn formatoptions-=l
+
 inoremap <buffer> <CR> <Cmd>call feedkeys(<SID>ListEnter(), 'in')<CR>
 nnoremap <buffer><silent> gqip <Cmd>call <SID>ReflowParagraph()<CR>
 
-let b:undo_ftplugin .= '|silent! iunmap <buffer> <CR>'
+let b:undo_ftplugin .= '|setlocal autoindent< textwidth<|silent! iunmap <buffer> <CR>'
       \ . '|silent! nunmap <buffer> gqip|unlet! b:did_markdown_list_editing'

@@ -4,6 +4,7 @@ execute 'source ' . fnameescape(s:vim_dir . '/.vimrc')
 
 execute 'edit ' . fnameescape(tempname() . '.md')
 call assert_equal('markdown', &l:filetype)
+call assert_equal(80, &l:textwidth)
 call assert_equal('markdown', b:current_syntax)
 call setline(1, '# A heading')
 call assert_equal('markdownH1', synIDattr(synID(1, 3, 1), 'name'))
@@ -32,6 +33,14 @@ let s:fence = repeat(nr2char(96), 3)
 call s:CheckEdit([s:fence, '- Shell command', s:fence], 2, "A\<CR>More\<Esc>",
       \ [s:fence, '- Shell command', 'More', s:fence])
 
+setlocal textwidth=30
+call s:CheckEdit([''], 1, "iPack the tent and bring enough stakes for the group.\<Esc>",
+      \ ['Pack the tent and bring enough', 'stakes for the group.'])
+call s:CheckEdit(['  12. Pack the tent'], 1, "A and bring enough stakes for the group.\<Esc>",
+      \ ['  12. Pack the tent and bring', '      enough stakes for the', '      group.'])
+call s:CheckEdit(['  - Pack the tent and bring enough stakes'], 1, "A for the group.\<Esc>",
+      \ ['  - Pack the tent and bring', '    enough stakes for the', '    group.'])
+
 setlocal textwidth=40 noautoindent
 call s:CheckEdit(['  12. Check the tent poles and pack the repair kit before leaving.', '  13. Fill the water bottles.'],
       \ 1, 'gqip', ['  12. Check the tent poles and pack the', '      repair kit before leaving.', '  13. Fill the water bottles.'])
@@ -49,10 +58,12 @@ for s:lnum in range(1, 4)
 endfor
 
 setlocal filetype=text
+call assert_equal(0, &l:textwidth)
 call assert_equal('', maparg('<CR>', 'i'))
 call assert_equal('', maparg('gqip', 'n'))
 call assert_equal('', eval(s:status_indicator))
-setlocal filetype=markdown
+setlocal textwidth=72 filetype=markdown
+call assert_equal(72, &l:textwidth)
 call assert_equal(' [Markdown lists]', eval(s:status_indicator))
 
 if !empty(v:errors)
