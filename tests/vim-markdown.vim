@@ -94,6 +94,24 @@ setlocal textwidth=72 filetype=markdown
 call assert_equal(72, &l:textwidth)
 call assert_equal(' [Markdown lists]', eval(s:status_indicator))
 
+let s:draft = tempname() . '.md.draft'
+execute 'edit! ' . fnameescape(s:draft)
+call assert_equal('markdown', &l:filetype, 'new draft file')
+call assert_equal('markdown', get(b:, 'current_syntax', ''), 'new draft syntax')
+call assert_equal(' [Markdown lists]', eval(s:status_indicator))
+
+try
+  call writefile(s:whole_file, s:draft)
+  bwipeout!
+  execute 'edit ' . fnameescape(s:draft)
+  call assert_equal('markdown', &l:filetype, 'existing draft file')
+  setlocal textwidth=40
+  call feedkeys('gg=G', 'xt')
+  call assert_equal(s:whole_file_expected, getline(1, '$'), 'whole-buffer reflow in a draft')
+finally
+  call delete(s:draft)
+endtry
+
 if !empty(v:errors)
   call writefile(v:errors, '/dev/stderr')
   cquit

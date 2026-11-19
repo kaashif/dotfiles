@@ -29,7 +29,8 @@ Markdown text wraps as you type at Vim's `textwidth` setting, which defaults
 to 80 columns in Markdown. In a list item, Enter indents a continuation line.
 Enter again on that empty line starts the next item. In Normal mode, `gqip`
 reflows the current item using the same width. Use `gg=G` to reflow prose
-and list items throughout the buffer.
+and list items throughout the buffer. Vim treats `*.md.draft` files as
+Markdown too.
 
 Run the Vim tests from the repository root.
 
