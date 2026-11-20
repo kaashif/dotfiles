@@ -23,11 +23,11 @@ endfunction
 call s:CheckEdit(['- Pack the tent'], 1, "A\<CR>Bring stakes\<Esc>",
       \ ['- Pack the tent', '  Bring stakes'])
 call s:CheckEdit(['- Pack the tent'], 1, "A\<CR>\<CR>Bring stakes\<Esc>",
-      \ ['- Pack the tent', '- Bring stakes'])
+      \ ['- Pack the tent', '', '- Bring stakes'])
 call s:CheckEdit(['- Supplies', '  12. Pack the tent'], 2, "A\<CR>Bring stakes\<CR>\<CR>Pack food\<Esc>",
-      \ ['- Supplies', '  12. Pack the tent', '      Bring stakes', '  13. Pack food'])
+      \ ['- Supplies', '  12. Pack the tent', '      Bring stakes', '', '  13. Pack food'])
 call s:CheckEdit(['   09) Pack the tent'], 1, "A\<CR>\<CR>Bring stakes\<Esc>",
-      \ ['   09) Pack the tent', '   10) Bring stakes'])
+      \ ['   09) Pack the tent', '', '   10) Bring stakes'])
 
 let s:fence = repeat(nr2char(96), 3)
 call s:CheckEdit([s:fence, '- Shell command', s:fence], 2, "A\<CR>More\<Esc>",

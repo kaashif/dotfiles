@@ -56,7 +56,7 @@ function! s:ListEnter() abort
       let parts = item[2]
       let marker = empty(parts[3]) ? parts[2]
             \ : printf('%0*d', strlen(parts[3]), str2nr(parts[3], 10) + 1) . parts[4]
-      return "\<C-U>" . parts[1] . marker . parts[5]
+      return "\<C-U>\<CR>0\<C-D>" . parts[1] . marker . parts[5]
     endif
   endif
 
